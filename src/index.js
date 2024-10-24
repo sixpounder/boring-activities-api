@@ -1,6 +1,7 @@
 import express from "express";
 import helmet from "helmet";
 import compression from "compression";
+import { rateLimit } from 'express-rate-limit'
 import ActivitiesController from '../src/controllers/activities.js';
 import ActivitiesService from "../src/services/activities-service.js";
 import ActivitiesRepository from "../src/repository/activities-repository.js";
@@ -10,6 +11,12 @@ const port = 3000;
 
 app.use(helmet());
 app.use(compression());
+app.use(rateLimit({
+    windowMs: 15 * 60 * 1000,
+    limit: 100,
+    standardHeaders: "draft-7",
+    legacyHeaders: false
+}));
 
 const activitiesServiceInstance = new ActivitiesService(new ActivitiesRepository());
 
