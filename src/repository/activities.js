@@ -14,7 +14,7 @@ export default class ActivitiesRepository {
 
     async ensureDb() {
         if (isNil(this._db)) {
-            this._db = JSON.parse(await promises.readFile(resolve("src", "resources", "activities.json"), "utf-8"));
+            this._db = JSON.parse(await promises.readFile(resolve("src", "resources", "db.json"), "utf-8"));
         }
 
         return this._db;

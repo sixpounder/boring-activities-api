@@ -3,8 +3,8 @@ import helmet from "helmet";
 import compression from "compression";
 import { rateLimit } from 'express-rate-limit'
 import ActivitiesController from '../src/controllers/activities.js';
-import ActivitiesService from "../src/services/activities-service.js";
-import ActivitiesRepository from "../src/repository/activities-repository.js";
+import ActivitiesService from "./services/activities.js";
+import ActivitiesRepository from "./repository/activities.js";
 
 const app = express();
 const port = 3000;

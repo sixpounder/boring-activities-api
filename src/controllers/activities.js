@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { toNumber } from "lodash-es";
+import { lowerCase, toNumber } from "lodash-es";
 
 export default class ActivitiesController extends Router {
     constructor(mountPoint, activitiesService) {
@@ -13,6 +13,10 @@ export default class ActivitiesController extends Router {
 
         this.get(`${mountPoint}/random`, async (req, res) => {
             res.json(await this.activitiesService.getRandom());
+        });
+
+        this.get(`${mountPoint}/category/:category`, async (req, res) => {
+            res.json(await this.activitiesService.getBy(a => lowerCase(a.category) === lowerCase(req.params.category)));
         });
 
         this.get(`${mountPoint}/:id(\d+)`, async (req, res) => {
