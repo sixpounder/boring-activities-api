@@ -2,8 +2,10 @@ import { first, filter, isNil } from "lodash-es";
 import { resolve } from "node:path";
 import { promises } from "node:fs";
 
-export default class ActivitiesRepository {
-    async get(id) {
+export default class ActivityRepository {
+    private _db: any;
+    
+    async get(id?: number) {
         const db = await this.ensureDb();
         if (isNil(id)) {
             return db;
