@@ -1,6 +1,8 @@
 const path = require("path");
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 const sourcePath = path.resolve("src", "doc");
 const exportPath = path.resolve("dist", "public");
@@ -48,7 +50,7 @@ module.exports = {
             {
                 test: /\.css$/i,
                 use: [
-                    "style-loader",
+                    MiniCssExtractPlugin.loader,
                     "css-loader",
                     "postcss-loader",
                 ],
@@ -58,13 +60,19 @@ module.exports = {
     resolve: {
         extensions: ['.*', '.js', '.jsx', '.ts', '.tsx', '.css'],
     },
+    optimization: {
+        minimizer: [
+            new CssMinimizerPlugin()
+        ]
+    },
     plugins: [
         new HtmlWebpackPlugin({
             inject: true,
             template: path.resolve(sourcePath, "index.html")
         }),
-        new webpack.HotModuleReplacementPlugin({
-            multiStep: true
+        new MiniCssExtractPlugin({
+            filename: "main.css",
+            chunkFilename: "main.css"
         })
     ],
 }

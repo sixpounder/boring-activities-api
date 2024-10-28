@@ -38,5 +38,5 @@ router.get("/api/activities/category/:category", bind(activitiesController.findB
 app.use(router);
 
 app.listen(port, () => {
-    console.log(`Application listening at ${port}`);
+    console.log(`Application listening at http://localhost:${port}`);
 });

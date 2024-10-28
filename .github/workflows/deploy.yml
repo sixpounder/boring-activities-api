@@ -30,7 +30,7 @@ jobs:
           cache: 'npm'
 
       - name: Install NPM dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build step
         run: "deno task build:doc"

@@ -2,10 +2,8 @@ import { PropsWithChildren, useMemo, useState } from "react";
 import { Pill } from "./widgets/Pill";
 import { ulid } from "ulid";
 import { motion } from "framer-motion"
+import Highlight from "./widgets/Highlight"
 import { Activity } from "../../model/activity"
-import { Terminal } from "./widgets/Terminal";
-import Highlight from "react-highlight"
-import "highlight.js/styles/night-owl.css"
 import { isNull, startCase } from "lodash-es";
 
 type HttpVerb = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
