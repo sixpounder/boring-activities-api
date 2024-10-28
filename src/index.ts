@@ -31,9 +31,9 @@ router.use(rateLimit({
     legacyHeaders: false
 }));
 router.get("/api/activities", bind(activitiesController.find, activitiesController));
+router.get("/api/activities/:id(\\d+)", bind(activitiesController.findOne, activitiesController));
 router.get("/api/activities/random", bind(activitiesController.random, activitiesController));
 router.get("/api/activities/category/:category", bind(activitiesController.findByCategory, activitiesController));
-router.get("/api/activities/:id(\d+)", bind(activitiesController.findOne, activitiesController));
 
 app.use(router);
 
