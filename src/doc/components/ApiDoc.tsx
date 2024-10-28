@@ -8,22 +8,22 @@ export const ApiDoc = () => {
                 <ApiEndpoint
                     href="/api/activities"
                     verb="GET"
-                    synopsis="Fetch all activities in the database"
+                    description="Fetch all activities in the database"
                 ></ApiEndpoint>
                 <ApiEndpoint
                     href="/api/activities/{id}"
                     verb="GET"
-                    synopsis="Get an activity by id"
+                    description="Get an activity by id"
                 ></ApiEndpoint>
                 <ApiEndpoint
                     href="/api/activities/random"
                     verb="GET"
-                    synopsis="Get a random activity"
+                    description="Get a random activity"
                 ></ApiEndpoint>
                 <ApiEndpoint
                     href="/api/activities/category/{category}"
                     verb="GET"
-                    synopsis="Get all activities by category"
+                    description="Get all activities by category"
                 ></ApiEndpoint>
             </div>
         </div>
