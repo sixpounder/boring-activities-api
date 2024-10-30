@@ -23,14 +23,8 @@ jobs:
         with:
           deno-version: v2.x
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Install NPM dependencies
-        run: npm ci
+      - name: "Install dependencies"
+        run: "deno install"
 
       - name: Build step
         run: "deno task build:doc"
