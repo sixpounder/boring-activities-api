@@ -9,6 +9,7 @@ export const ApiDoc = () => {
                     href="/api/activities"
                     verb="GET"
                     description="Fetch all activities in the database"
+                    queryParams={[ { placeholder: "Page", name: "page", value: 0 }, { placeholder: "Page size", name: "pageSize", value: 10 } ]}
                 ></ApiEndpoint>
                 <ApiEndpoint
                     href="/api/activities/{id}"

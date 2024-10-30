@@ -1,8 +1,8 @@
-import { PropsWithChildren, useMemo, useState } from "react";
+import { PropsWithChildren, useEffect, useMemo, useState } from "react";
 import { Pill } from "./widgets/Pill";
 import { ulid } from "ulid";
 import { motion } from "framer-motion"
-import Highlight from "./widgets/Highlight"
+import { Highlight } from "./widgets/Highlight"
 import { Activity } from "../../model/activity"
 import { isNull, startCase } from "lodash-es";
 
@@ -13,11 +13,18 @@ interface ApiEndpointProps {
     verb: HttpVerb;
     expanded?: boolean;
     description?: string;
+    queryParams?: VariableLike[]
+}
+
+interface VariableLike {
+    placeholder: string;
+    name: string;
+    value: any;
 }
 
 const pathVariableRegex = /\{([^\}\{]+)\}/gi;
 
-export const ApiEndpoint = ({ href, verb, expanded = false, description = "" }: PropsWithChildren<ApiEndpointProps>) => {
+export const ApiEndpoint = ({ href, verb, expanded = false, description = "", queryParams = [] }: PropsWithChildren<ApiEndpointProps>) => {
     function tintFor(verb: HttpVerb): "green" | "red" | "orange" | "blue" {
         switch (verb) {
             case "GET":
@@ -36,9 +43,10 @@ export const ApiEndpoint = ({ href, verb, expanded = false, description = "" }: 
     const [isExpanded, setExpanded] = useState(expanded)
     const [firstExpansion, setFirstExpansion] = useState(false)
     const [sampleResponse, setSampleResponse] = useState<Activity | Activity[]>(null)
+    const [formattedResponse, setFormattedResponse] = useState(null);
 
     const [variables, _setVariables] = useState<
-        { placeholder: string; name: string, value: string }[]
+        VariableLike[]
     >([]);
 
     const urlNode: JSX.Element[] = useMemo(() =>
@@ -81,6 +89,12 @@ export const ApiEndpoint = ({ href, verb, expanded = false, description = "" }: 
             return acc;
         }, []).slice(0, -1), [href]);
 
+    useEffect(() => {
+        if (!isNull(sampleResponse)) {
+            setFormattedResponse(JSON.stringify(sampleResponse, null, 2))
+        }
+    }, [sampleResponse])
+
     async function toggleExpand(_event: React.MouseEvent<HTMLElement>): Promise<void> {
         const nextState = !isExpanded;
         setExpanded(nextState)
@@ -94,7 +108,11 @@ export const ApiEndpoint = ({ href, verb, expanded = false, description = "" }: 
 
     async function fetchApi() {
         try {
-            const response = await fetch(actualizedUrl());
+            let url = actualizedUrl();
+            if (queryParams.length) {
+                url += "?" + queryParams.reduce((acc, item) => { acc.append(item.name, item.value); return acc; }, new URLSearchParams());
+            }
+            const response = await fetch(url);
             const body: Activity[] = await response.json();
             setSampleResponse(body)
         } catch (e) {
@@ -112,30 +130,33 @@ export const ApiEndpoint = ({ href, verb, expanded = false, description = "" }: 
     }
 
     function renderForm() {
-        if (variables.length) {
+        const allVariables = variables.concat(queryParams);
+        if (allVariables.length) {
             return (
                 <>
                     <form>
                         {
-                            variables.map(v => {
+                            allVariables.map(v => {
                                 return (
-                                    <>
-                                    <label htmlFor={`variable-${v.name}`}>{ startCase(v.name) }</label>
-                                    <input
-                                        id={`variable-${v.name}`}
-                                        key={`variable-${v.name}`}
-                                        type="text"
-                                        defaultValue={ v.value }
-                                        onChange={ event => v.value = event.target.value }
-                                        placeholder={ startCase(v.name) }
-                                        className="shadow border rounded w-full py-2 px-3 dark:border-slate-600 dark:bg-slate-700 bg-cyan-100 border-cyan-600 bg-opacity-35 dark:text-gray-200 text-neutral-800 leading-tight focus:outline-none focus:shadow-outline"
-                                    ></input>
-                                    </>
+                                    <div key={`variable-${v.name}-label`} className="flex flex-row items-center space-x-4 mt-4">
+                                        <label className="w-1/6 text-right" htmlFor={`variable-${v.name}`}>{ startCase(v.name) }</label>
+                                        <input
+                                            id={`variable-${v.name}`}
+                                            key={`variable-${v.name}`}
+                                            type="text"
+                                            defaultValue={ v.value }
+                                            onChange={ event => v.value = event.target.value }
+                                            placeholder={ startCase(v.name) }
+                                            className="shadow border rounded w-full py-2 px-3 dark:border-slate-600 dark:bg-slate-700 bg-cyan-100 border-cyan-600 bg-opacity-35 dark:text-gray-200 text-neutral-800 leading-tight focus:outline-none focus:shadow-outline"
+                                        ></input>
+                                    </div>
                                 )
                             })
                         }
                     </form>
-                    <button type="submit" className="btn mt-4" onClick={ fetchApi }>Send request</button>
+                    <div className="text-right">
+                        <button className="btn mt-4" onClick={ fetchApi }>Send request</button>
+                    </div>
                 </>
             )
         } else {
@@ -167,7 +188,7 @@ export const ApiEndpoint = ({ href, verb, expanded = false, description = "" }: 
                 >
                     { renderForm() }
 
-                    { !isNull(sampleResponse) && <Highlight className="rounded-lg language-json p-4 mt-4">{ JSON.stringify(sampleResponse, null, 2) }</Highlight> }
+                    { !isNull(formattedResponse) && <Highlight className="rounded-lg language-json p-4 mt-4">{ formattedResponse }</Highlight> }
                 </motion.div>
             }
         </div>
