@@ -134,12 +134,12 @@ export const ApiEndpoint = ({ href, verb, expanded = false, description = "", qu
         if (allVariables.length) {
             return (
                 <>
-                    <form>
+                    <form onSubmit={fetchApi}>
                         {
                             allVariables.map(v => {
                                 return (
                                     <div key={`variable-${v.name}-label`} className="flex flex-row items-center space-x-4 mt-4">
-                                        <label className="w-1/6 text-right" htmlFor={`variable-${v.name}`}>{ startCase(v.name) }</label>
+                                        <label className="w-32" htmlFor={`variable-${v.name}`}>{ startCase(v.name) }</label>
                                         <input
                                             id={`variable-${v.name}`}
                                             key={`variable-${v.name}`}
@@ -153,10 +153,8 @@ export const ApiEndpoint = ({ href, verb, expanded = false, description = "", qu
                                 )
                             })
                         }
+                    <button type="submit" className="btn mt-4" onClick={ (e) => { e.preventDefault(); fetchApi(); } }>Send request</button>
                     </form>
-                    <div className="text-right">
-                        <button className="btn mt-4" onClick={ fetchApi }>Send request</button>
-                    </div>
                 </>
             )
         } else {
