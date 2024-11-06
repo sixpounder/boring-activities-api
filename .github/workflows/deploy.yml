@@ -35,4 +35,3 @@ jobs:
           project: "andreacoron-boring-acti-43"
           entrypoint: "src/index.ts"
           root: ""
-

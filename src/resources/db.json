@@ -1,702 +1,702 @@
 [
-    {
-        "id": 1,
-        "label": "Learn Javascript",
-        "description": "A gratifying experience for every software engineer",
-        "difficulty": 9,
-        "category": "Technology"
-    },
-    {
-        "id": 2,
-        "label": "Brew the Perfect Coffee",
-        "description": "A fine balance between science and magic",
-        "difficulty": 7,
-        "category": "Food & Drink"
-    },
-    {
-        "id": 3,
-        "label": "Assemble IKEA Furniture",
-        "description": "The ultimate test of human patience and logic",
-        "difficulty": 8,
-        "category": "Household"
-    },
-    {
-        "id": 4,
-        "label": "Run a Marathon",
-        "description": "Putting one foot in front of the other, for 42 kilometers",
-        "difficulty": 10,
-        "category": "Fitness"
-    },
-    {
-        "id": 5,
-        "label": "Binge Watch a Series",
-        "description": "Requires stamina, snacks, and a very comfy couch",
-        "difficulty": 3,
-        "category": "Leisure"
-    },
-    {
-        "id": 6,
-        "label": "Learn Guitar",
-        "description": "Becoming the life of every campfire",
-        "difficulty": 8,
-        "category": "Music"
-    },
-    {
-        "id": 7,
-        "label": "Cook a 5-Course Meal",
-        "description": "A culinary adventure in multitasking",
-        "difficulty": 9,
-        "category": "Food & Drink"
-    },
-    {
-        "id": 8,
-        "label": "Learn to Code in C++",
-        "description": "The gateway to pointer hell",
-        "difficulty": 9,
-        "category": "Technology"
-    },
-    {
-        "id": 9,
-        "label": "Paint a Portrait",
-        "description": "Capturing a person’s essence on canvas... or trying to",
-        "difficulty": 7,
-        "category": "Creative"
-    },
-    {
-        "id": 10,
-        "label": "Bake Sourdough Bread",
-        "description": "A delicious science experiment",
-        "difficulty": 8,
-        "category": "Food & Drink"
-    },
-    {
-        "id": 11,
-        "label": "Learn to Meditate",
-        "description": "Find inner peace, or at least quiet your mind for a bit",
-        "difficulty": 5,
-        "category": "Wellness"
-    },
-    {
-        "id": 12,
-        "label": "Solve a Rubik’s Cube",
-        "description": "More than just matching colors, it’s a brain teaser",
-        "difficulty": 8,
-        "category": "Puzzles & Games"
-    },
-    {
-        "id": 13,
-        "label": "Write a Short Story",
-        "description": "Turning your imagination into words",
-        "difficulty": 7,
-        "category": "Creative"
-    },
-    {
-        "id": 14,
-        "label": "Learn to Sew",
-        "description": "Fixing clothes or creating something new, one stitch at a time",
-        "difficulty": 6,
-        "category": "Craft"
-    },
-    {
-        "id": 15,
-        "label": "Build a Website",
-        "description": "Your digital presence, designed from scratch",
-        "difficulty": 7,
-        "category": "Technology"
-    },
-    {
-        "id": 16,
-        "label": "Learn to Play Chess",
-        "description": "A game of strategy, patience, and a lot of thinking",
-        "difficulty": 7,
-        "category": "Puzzles & Games"
-    },
-    {
-        "id": 17,
-        "label": "Go Camping",
-        "description": "Embracing the great outdoors... and bugs",
-        "difficulty": 5,
-        "category": "Outdoor"
-    },
-    {
-        "id": 18,
-        "label": "Start a Garden",
-        "description": "Grow your own food or at least a pretty flower",
-        "difficulty": 6,
-        "category": "Outdoor"
-    },
-    {
-        "id": 19,
-        "label": "Learn French",
-        "description": "The language of love and croissants",
-        "difficulty": 8,
-        "category": "Language"
-    },
-    {
-        "id": 20,
-        "label": "Change a Tire",
-        "description": "Because flat tires never happen at a convenient time",
-        "difficulty": 6,
-        "category": "Life Skills"
-    },
-    {
-        "id": 21,
-        "label": "Organize a Party",
-        "description": "A social event planning challenge",
-        "difficulty": 7,
-        "category": "Social"
-    },
-    {
-        "id": 22,
-        "label": "Learn Photoshop",
-        "description": "Editing photos or creating memes like a pro",
-        "difficulty": 7,
-        "category": "Technology"
-    },
-    {
-        "id": 23,
-        "label": "Go on a Hike",
-        "description": "Exploring nature one step at a time",
-        "difficulty": 6,
-        "category": "Outdoor"
-    },
-    {
-        "id": 24,
-        "label": "Do 100 Push-Ups",
-        "description": "A physical and mental challenge, mostly mental",
-        "difficulty": 8,
-        "category": "Fitness"
-    },
-    {
-        "id": 25,
-        "label": "Learn to Juggle",
-        "description": "Because keeping three balls in the air seems fun",
-        "difficulty": 7,
-        "category": "Entertainment"
-    },
-    {
-        "id": 26,
-        "label": "Learn a Card Game",
-        "description": "A great way to pass time and strategize",
-        "difficulty": 5,
-        "category": "Puzzles & Games"
-    },
-    {
-        "id": 27,
-        "label": "Write a Novel",
-        "description": "A marathon of creativity and self-doubt",
-        "difficulty": 9,
-        "category": "Creative"
-    },
-    {
-        "id": 28,
-        "label": "Learn to Swim",
-        "description": "A life-saving skill and a great way to cool off",
-        "difficulty": 5,
-        "category": "Fitness"
-    },
-    {
-        "id": 29,
-        "label": "Host a Game Night",
-        "description": "A social way to settle old scores",
-        "difficulty": 5,
-        "category": "Social"
-    },
-    {
-        "id": 30,
-        "label": "Build a Treehouse",
-        "description": "Because every kid needs a secret hideout",
-        "difficulty": 8,
-        "category": "Craft"
-    },
-    {
-        "id": 31,
-        "label": "Learn Origami",
-        "description": "Folding paper into art, or at least trying to",
-        "difficulty": 6,
-        "category": "Craft"
-    },
-    {
-        "id": 32,
-        "label": "Host a Dinner Party",
-        "description": "Cooking, socializing, and hoping nothing burns",
-        "difficulty": 7,
-        "category": "Social"
-    },
-    {
-        "id": 33,
-        "label": "Make Ice Cream",
-        "description": "A sweet treat made from scratch",
-        "difficulty": 6,
-        "category": "Food & Drink"
-    },
-    {
-        "id": 34,
-        "label": "Take a Yoga Class",
-        "description": "Stretching your body and calming your mind",
-        "difficulty": 5,
-        "category": "Wellness"
-    },
-    {
-        "id": 35,
-        "label": "Build a PC",
-        "description": "Turning parts into a powerful machine of your own design",
-        "difficulty": 9,
-        "category": "Technology"
-    },
-    {
-        "id": 36,
-        "label": "Go Fishing",
-        "description": "Patience, skill, and hopefully catching something",
-        "difficulty": 6,
-        "category": "Outdoor"
-    },
-    {
-        "id": 37,
-        "label": "Learn to Bake a Cake",
-        "description": "Mixing ingredients into delicious layers of happiness",
-        "difficulty": 7,
-        "category": "Food & Drink"
-    },
-    {
-        "id": 38,
-        "label": "Go Stargazing",
-        "description": "Connecting with the cosmos, or just counting stars",
-        "difficulty": 2,
-        "category": "Outdoor"
-    },
-    {
-        "id": 39,
-        "label": "Play the Drums",
-        "description": "Making noise, rhythm, and probably annoying the neighbors",
-        "difficulty": 8,
-        "category": "Music"
-    },
-    {
-        "id": 40,
-        "label": "Write a Poem",
-        "description": "Creative expression in its most condensed form",
-        "difficulty": 6,
-        "category": "Creative"
-    },
-    {
-        "id": 41,
-        "label": "Go Birdwatching",
-        "description": "Quietly observing nature's flying creatures",
-        "difficulty": 4,
-        "category": "Outdoor"
-    },
-    {
-        "id": 42,
-        "label": "Build a Model Plane",
-        "description": "Precision, patience, and tiny parts",
-        "difficulty": 7,
-        "category": "Craft"
-    },
-    {
-        "id": 43,
-        "label": "Learn to Ice Skate",
-        "description": "Gliding gracefully on thin blades, or not so gracefully",
-        "difficulty": 6,
-        "category": "Fitness"
-    },
-    {
-        "id": 44,
-        "label": "Fix a Leaky Faucet",
-        "description": "A plumbing challenge that prevents your water bill from skyrocketing",
-        "difficulty": 5,
-        "category": "Life Skills"
-    },
-    {
-        "id": 45,
-        "label": "Solve a Crossword Puzzle",
-        "description": "A fun test of vocabulary and patience",
-        "difficulty": 6,
-        "category": "Puzzles & Games"
-    },
-    {
-        "id": 46,
-        "label": "Learn to Snowboard",
-        "description": "Carving down the mountain with style",
-        "difficulty": 8,
-        "category": "Outdoor"
-    },
-    {
-        "id": 47,
-        "label": "Make Sushi",
-        "description": "A delicate and tasty culinary art",
-        "difficulty": 9,
-        "category": "Food & Drink"
-    },
-    {
-        "id": 48,
-        "label": "Learn to DJ",
-        "description": "Becoming the life of the party with just the right tunes",
-        "difficulty": 8,
-        "category": "Music"
-    },
-    {
-        "id": 49,
-        "label": "Go Kayaking",
-        "description": "A water adventure with paddles and balance",
-        "difficulty": 7,
-        "category": "Outdoor"
-    },
-    {
-        "id": 50,
-        "label": "Host a Podcast",
-        "description": "Sharing your thoughts with the world, or a niche audience",
-        "difficulty": 6,
-        "category": "Technology"
-    },
-    {
-        "id": 51,
-        "label": "Learn to Dance Salsa",
-        "description": "Hot, spicy, and full of rhythm",
-        "difficulty": 7,
-        "category": "Dance"
-    },
-    {
-        "id": 52,
-        "label": "Do a Handstand",
-        "description": "Defying gravity, at least for a few seconds",
-        "difficulty": 8,
-        "category": "Fitness"
-    },
-    {
-        "id": 53,
-        "label": "Make Homemade Pasta",
-        "description": "A fresh and delicious culinary experience",
-        "difficulty": 7,
-        "category": "Food & Drink"
-    },
-    {
-        "id": 54,
-        "label": "Learn to Play Piano",
-        "description": "Tickling the ivories with your fingers",
-        "difficulty": 8,
-        "category": "Music"
-    },
-    {
-        "id": 55,
-        "label": "Go to a Comedy Show",
-        "description": "Laughter is the best medicine, unless you’re the punchline",
-        "difficulty": 2,
-        "category": "Entertainment"
-    },
-    {
-        "id": 56,
-        "label": "Build a Robot",
-        "description": "Combining tech and creativity to make something cool",
-        "difficulty": 9,
-        "category": "Technology"
-    },
-    {
-        "id": 57,
-        "label": "Go Rock Climbing",
-        "description": "A test of strength, balance, and bravery",
-        "difficulty": 9,
-        "category": "Fitness"
-    },
-    {
-        "id": 58,
-        "label": "Master a Magic Trick",
-        "description": "Misdirection, sleight of hand, and a little mystery",
-        "difficulty": 7,
-        "category": "Entertainment"
-    },
-    {
-        "id": 59,
-        "label": "Do a Puzzle",
-        "description": "Piece by piece, you complete the picture",
-        "difficulty": 6,
-        "category": "Puzzles & Games"
-    },
-    {
-        "id": 60,
-        "label": "Learn to Knit",
-        "description": "Turning yarn into cozy creations",
-        "difficulty": 6,
-        "category": "Craft"
-    },
-    {
-        "id": 61,
-        "label": "Take a Road Trip",
-        "description": "The adventure is as much about the journey as the destination",
-        "difficulty": 5,
-        "category": "Travel"
-    },
-    {
-        "id": 62,
-        "label": "Learn Sign Language",
-        "description": "Communicating without words",
-        "difficulty": 8,
-        "category": "Language"
-    },
-    {
-        "id": 63,
-        "label": "Clean the Entire House",
-        "description": "An all-day endeavor to reset your living space",
-        "difficulty": 7,
-        "category": "Household"
-    },
-    {
-        "id": 64,
-        "label": "Attend a Music Festival",
-        "description": "Days of live music, dancing, and probably sunburn",
-        "difficulty": 3,
-        "category": "Entertainment"
-    },
-    {
-        "id": 65,
-        "label": "Do a Backflip",
-        "description": "Gravity defiance in its most acrobatic form",
-        "difficulty": 9,
-        "category": "Fitness"
-    },
-    {
-        "id": 66,
-        "label": "Make Homemade Pizza",
-        "description": "Cheesy, crispy, and made exactly how you like it",
-        "difficulty": 6,
-        "category": "Food & Drink"
-    },
-    {
-        "id": 67,
-        "label": "Build a Lego Set",
-        "description": "A structured form of play with colorful bricks",
-        "difficulty": 5,
-        "category": "Craft"
-    },
-    {
-        "id": 68,
-        "label": "Learn to Code in Python",
-        "description": "A beginner-friendly yet powerful language",
-        "difficulty": 6,
-        "category": "Technology"
-    },
-    {
-        "id": 69,
-        "label": "Attend a Paint and Sip Class",
-        "description": "Painting with a drink in hand for artistic inspiration",
-        "difficulty": 4,
-        "category": "Creative"
-    },
-    {
-        "id": 70,
-        "label": "Take a Cooking Class",
-        "description": "A delicious way to learn new culinary skills",
-        "difficulty": 7,
-        "category": "Food & Drink"
-    },
-    {
-        "id": 71,
-        "label": "Go Skiing",
-        "description": "Speeding down snowy slopes with grace... or tumbles",
-        "difficulty": 8,
-        "category": "Outdoor"
-    },
-    {
-        "id": 72,
-        "label": "Do a Book Club",
-        "description": "Discussing literature, with or without wine",
-        "difficulty": 4,
-        "category": "Social"
-    },
-    {
-        "id": 73,
-        "label": "Run a 5K",
-        "description": "A shorter yet still challenging race",
-        "difficulty": 7,
-        "category": "Fitness"
-    },
-    {
-        "id": 74,
-        "label": "Attend a Live Sports Event",
-        "description": "Cheering on your favorite team in person",
-        "difficulty": 2,
-        "category": "Entertainment"
-    },
-    {
-        "id": 75,
-        "label": "Play Volleyball",
-        "description": "A beach or court game of bump, set, and spike",
-        "difficulty": 6,
-        "category": "Fitness"
-    },
-    {
-        "id": 76,
-        "label": "Bake Cookies",
-        "description": "Sweet, bite-sized treats fresh from the oven",
-        "difficulty": 5,
-        "category": "Food & Drink"
-    },
-    {
-        "id": 77,
-        "label": "Learn Archery",
-        "description": "Hitting a bullseye from a distance",
-        "difficulty": 7,
-        "category": "Outdoor"
-    },
-    {
-        "id": 78,
-        "label": "Take a Dance Class",
-        "description": "Learning new moves, one step at a time",
-        "difficulty": 6,
-        "category": "Dance"
-    },
-    {
-        "id": 79,
-        "label": "Learn Calligraphy",
-        "description": "The art of beautiful handwriting",
-        "difficulty": 7,
-        "category": "Craft"
-    },
-    {
-        "id": 80,
-        "label": "Go to a Concert",
-        "description": "Live music and the energy of the crowd",
-        "difficulty": 2,
-        "category": "Entertainment"
-    },
-    {
-        "id": 81,
-        "label": "Learn to Fly a Drone",
-        "description": "Navigating the skies with a remote control",
-        "difficulty": 6,
-        "category": "Technology"
-    },
-    {
-        "id": 82,
-        "label": "Learn to Make Cocktails",
-        "description": "Mixing drinks like a pro bartender",
-        "difficulty": 7,
-        "category": "Food & Drink"
-    },
-    {
-        "id": 83,
-        "label": "Make a Scrapbook",
-        "description": "Preserving memories with a creative touch",
-        "difficulty": 6,
-        "category": "Craft"
-    },
-    {
-        "id": 84,
-        "label": "Take a Photography Class",
-        "description": "Capturing moments with perfect framing and lighting",
-        "difficulty": 7,
-        "category": "Creative"
-    },
-    {
-        "id": 85,
-        "label": "Do a Charity Run",
-        "description": "Running for a good cause",
-        "difficulty": 6,
-        "category": "Fitness"
-    },
-    {
-        "id": 86,
-        "label": "Learn to Sail",
-        "description": "Navigating the waters by wind and skill",
-        "difficulty": 8,
-        "category": "Outdoor"
-    },
-    {
-        "id": 87,
-        "label": "Try Paddleboarding",
-        "description": "Balance and paddling across calm waters",
-        "difficulty": 6,
-        "category": "Outdoor"
-    },
-    {
-        "id": 88,
-        "label": "Build a Gingerbread House",
-        "description": "An edible and festive construction project",
-        "difficulty": 5,
-        "category": "Craft"
-    },
-    {
-        "id": 89,
-        "label": "Do a Digital Detox",
-        "description": "Unplugging from screens for a day",
-        "difficulty": 7,
-        "category": "Wellness"
-    },
-    {
-        "id": 90,
-        "label": "Attend a Dance Party",
-        "description": "Let loose and dance the night away",
-        "difficulty": 3,
-        "category": "Social"
-    },
-    {
-        "id": 91,
-        "label": "Learn to Make Pottery",
-        "description": "Shaping clay into art or functional pieces",
-        "difficulty": 8,
-        "category": "Craft"
-    },
-    {
-        "id": 92,
-        "label": "Take a Hot Air Balloon Ride",
-        "description": "Soaring through the skies for a breathtaking view",
-        "difficulty": 2,
-        "category": "Travel"
-    },
-    {
-        "id": 93,
-        "label": "Take a Boxing Class",
-        "description": "Punching your way to fitness",
-        "difficulty": 8,
-        "category": "Fitness"
-    },
-    {
-        "id": 94,
-        "label": "Learn to Surf",
-        "description": "Riding the waves with balance and style",
-        "difficulty": 9,
-        "category": "Outdoor"
-    },
-    {
-        "id": 95,
-        "label": "Go to a Zoo",
-        "description": "Observing the animal kingdom up close",
-        "difficulty": 2,
-        "category": "Leisure"
-    },
-    {
-        "id": 96,
-        "label": "Fly a Kite",
-        "description": "Harnessing the wind for some high-flying fun",
-        "difficulty": 3,
-        "category": "Outdoor"
-    },
-    {
-        "id": 97,
-        "label": "Learn to Make Jewelry",
-        "description": "Creating beautiful accessories from scratch",
-        "difficulty": 7,
-        "category": "Craft"
-    },
-    {
-        "id": 98,
-        "label": "Go to a Theme Park",
-        "description": "Rides, games, and probably some overpriced snacks",
-        "difficulty": 3,
-        "category": "Entertainment"
-    },
-    {
-        "id": 99,
-        "label": "Go to an Art Museum",
-        "description": "A cultural experience of creativity and history",
-        "difficulty": 2,
-        "category": "Leisure"
-    },
-    {
-        "id": 100,
-        "label": "Learn to Make Sushi",
-        "description": "The art of rolling your own Japanese cuisine",
-        "difficulty": 8,
-        "category": "Food & Drink"
-    }
+  {
+    "id": 1,
+    "label": "Learn Javascript",
+    "description": "A gratifying experience for every software engineer",
+    "difficulty": 9,
+    "category": "Technology"
+  },
+  {
+    "id": 2,
+    "label": "Brew the Perfect Coffee",
+    "description": "A fine balance between science and magic",
+    "difficulty": 7,
+    "category": "Food & Drink"
+  },
+  {
+    "id": 3,
+    "label": "Assemble IKEA Furniture",
+    "description": "The ultimate test of human patience and logic",
+    "difficulty": 8,
+    "category": "Household"
+  },
+  {
+    "id": 4,
+    "label": "Run a Marathon",
+    "description": "Putting one foot in front of the other, for 42 kilometers",
+    "difficulty": 10,
+    "category": "Fitness"
+  },
+  {
+    "id": 5,
+    "label": "Binge Watch a Series",
+    "description": "Requires stamina, snacks, and a very comfy couch",
+    "difficulty": 3,
+    "category": "Leisure"
+  },
+  {
+    "id": 6,
+    "label": "Learn Guitar",
+    "description": "Becoming the life of every campfire",
+    "difficulty": 8,
+    "category": "Music"
+  },
+  {
+    "id": 7,
+    "label": "Cook a 5-Course Meal",
+    "description": "A culinary adventure in multitasking",
+    "difficulty": 9,
+    "category": "Food & Drink"
+  },
+  {
+    "id": 8,
+    "label": "Learn to Code in C++",
+    "description": "The gateway to pointer hell",
+    "difficulty": 9,
+    "category": "Technology"
+  },
+  {
+    "id": 9,
+    "label": "Paint a Portrait",
+    "description": "Capturing a person’s essence on canvas... or trying to",
+    "difficulty": 7,
+    "category": "Creative"
+  },
+  {
+    "id": 10,
+    "label": "Bake Sourdough Bread",
+    "description": "A delicious science experiment",
+    "difficulty": 8,
+    "category": "Food & Drink"
+  },
+  {
+    "id": 11,
+    "label": "Learn to Meditate",
+    "description": "Find inner peace, or at least quiet your mind for a bit",
+    "difficulty": 5,
+    "category": "Wellness"
+  },
+  {
+    "id": 12,
+    "label": "Solve a Rubik’s Cube",
+    "description": "More than just matching colors, it’s a brain teaser",
+    "difficulty": 8,
+    "category": "Puzzles & Games"
+  },
+  {
+    "id": 13,
+    "label": "Write a Short Story",
+    "description": "Turning your imagination into words",
+    "difficulty": 7,
+    "category": "Creative"
+  },
+  {
+    "id": 14,
+    "label": "Learn to Sew",
+    "description": "Fixing clothes or creating something new, one stitch at a time",
+    "difficulty": 6,
+    "category": "Craft"
+  },
+  {
+    "id": 15,
+    "label": "Build a Website",
+    "description": "Your digital presence, designed from scratch",
+    "difficulty": 7,
+    "category": "Technology"
+  },
+  {
+    "id": 16,
+    "label": "Learn to Play Chess",
+    "description": "A game of strategy, patience, and a lot of thinking",
+    "difficulty": 7,
+    "category": "Puzzles & Games"
+  },
+  {
+    "id": 17,
+    "label": "Go Camping",
+    "description": "Embracing the great outdoors... and bugs",
+    "difficulty": 5,
+    "category": "Outdoor"
+  },
+  {
+    "id": 18,
+    "label": "Start a Garden",
+    "description": "Grow your own food or at least a pretty flower",
+    "difficulty": 6,
+    "category": "Outdoor"
+  },
+  {
+    "id": 19,
+    "label": "Learn French",
+    "description": "The language of love and croissants",
+    "difficulty": 8,
+    "category": "Language"
+  },
+  {
+    "id": 20,
+    "label": "Change a Tire",
+    "description": "Because flat tires never happen at a convenient time",
+    "difficulty": 6,
+    "category": "Life Skills"
+  },
+  {
+    "id": 21,
+    "label": "Organize a Party",
+    "description": "A social event planning challenge",
+    "difficulty": 7,
+    "category": "Social"
+  },
+  {
+    "id": 22,
+    "label": "Learn Photoshop",
+    "description": "Editing photos or creating memes like a pro",
+    "difficulty": 7,
+    "category": "Technology"
+  },
+  {
+    "id": 23,
+    "label": "Go on a Hike",
+    "description": "Exploring nature one step at a time",
+    "difficulty": 6,
+    "category": "Outdoor"
+  },
+  {
+    "id": 24,
+    "label": "Do 100 Push-Ups",
+    "description": "A physical and mental challenge, mostly mental",
+    "difficulty": 8,
+    "category": "Fitness"
+  },
+  {
+    "id": 25,
+    "label": "Learn to Juggle",
+    "description": "Because keeping three balls in the air seems fun",
+    "difficulty": 7,
+    "category": "Entertainment"
+  },
+  {
+    "id": 26,
+    "label": "Learn a Card Game",
+    "description": "A great way to pass time and strategize",
+    "difficulty": 5,
+    "category": "Puzzles & Games"
+  },
+  {
+    "id": 27,
+    "label": "Write a Novel",
+    "description": "A marathon of creativity and self-doubt",
+    "difficulty": 9,
+    "category": "Creative"
+  },
+  {
+    "id": 28,
+    "label": "Learn to Swim",
+    "description": "A life-saving skill and a great way to cool off",
+    "difficulty": 5,
+    "category": "Fitness"
+  },
+  {
+    "id": 29,
+    "label": "Host a Game Night",
+    "description": "A social way to settle old scores",
+    "difficulty": 5,
+    "category": "Social"
+  },
+  {
+    "id": 30,
+    "label": "Build a Treehouse",
+    "description": "Because every kid needs a secret hideout",
+    "difficulty": 8,
+    "category": "Craft"
+  },
+  {
+    "id": 31,
+    "label": "Learn Origami",
+    "description": "Folding paper into art, or at least trying to",
+    "difficulty": 6,
+    "category": "Craft"
+  },
+  {
+    "id": 32,
+    "label": "Host a Dinner Party",
+    "description": "Cooking, socializing, and hoping nothing burns",
+    "difficulty": 7,
+    "category": "Social"
+  },
+  {
+    "id": 33,
+    "label": "Make Ice Cream",
+    "description": "A sweet treat made from scratch",
+    "difficulty": 6,
+    "category": "Food & Drink"
+  },
+  {
+    "id": 34,
+    "label": "Take a Yoga Class",
+    "description": "Stretching your body and calming your mind",
+    "difficulty": 5,
+    "category": "Wellness"
+  },
+  {
+    "id": 35,
+    "label": "Build a PC",
+    "description": "Turning parts into a powerful machine of your own design",
+    "difficulty": 9,
+    "category": "Technology"
+  },
+  {
+    "id": 36,
+    "label": "Go Fishing",
+    "description": "Patience, skill, and hopefully catching something",
+    "difficulty": 6,
+    "category": "Outdoor"
+  },
+  {
+    "id": 37,
+    "label": "Learn to Bake a Cake",
+    "description": "Mixing ingredients into delicious layers of happiness",
+    "difficulty": 7,
+    "category": "Food & Drink"
+  },
+  {
+    "id": 38,
+    "label": "Go Stargazing",
+    "description": "Connecting with the cosmos, or just counting stars",
+    "difficulty": 2,
+    "category": "Outdoor"
+  },
+  {
+    "id": 39,
+    "label": "Play the Drums",
+    "description": "Making noise, rhythm, and probably annoying the neighbors",
+    "difficulty": 8,
+    "category": "Music"
+  },
+  {
+    "id": 40,
+    "label": "Write a Poem",
+    "description": "Creative expression in its most condensed form",
+    "difficulty": 6,
+    "category": "Creative"
+  },
+  {
+    "id": 41,
+    "label": "Go Birdwatching",
+    "description": "Quietly observing nature's flying creatures",
+    "difficulty": 4,
+    "category": "Outdoor"
+  },
+  {
+    "id": 42,
+    "label": "Build a Model Plane",
+    "description": "Precision, patience, and tiny parts",
+    "difficulty": 7,
+    "category": "Craft"
+  },
+  {
+    "id": 43,
+    "label": "Learn to Ice Skate",
+    "description": "Gliding gracefully on thin blades, or not so gracefully",
+    "difficulty": 6,
+    "category": "Fitness"
+  },
+  {
+    "id": 44,
+    "label": "Fix a Leaky Faucet",
+    "description": "A plumbing challenge that prevents your water bill from skyrocketing",
+    "difficulty": 5,
+    "category": "Life Skills"
+  },
+  {
+    "id": 45,
+    "label": "Solve a Crossword Puzzle",
+    "description": "A fun test of vocabulary and patience",
+    "difficulty": 6,
+    "category": "Puzzles & Games"
+  },
+  {
+    "id": 46,
+    "label": "Learn to Snowboard",
+    "description": "Carving down the mountain with style",
+    "difficulty": 8,
+    "category": "Outdoor"
+  },
+  {
+    "id": 47,
+    "label": "Make Sushi",
+    "description": "A delicate and tasty culinary art",
+    "difficulty": 9,
+    "category": "Food & Drink"
+  },
+  {
+    "id": 48,
+    "label": "Learn to DJ",
+    "description": "Becoming the life of the party with just the right tunes",
+    "difficulty": 8,
+    "category": "Music"
+  },
+  {
+    "id": 49,
+    "label": "Go Kayaking",
+    "description": "A water adventure with paddles and balance",
+    "difficulty": 7,
+    "category": "Outdoor"
+  },
+  {
+    "id": 50,
+    "label": "Host a Podcast",
+    "description": "Sharing your thoughts with the world, or a niche audience",
+    "difficulty": 6,
+    "category": "Technology"
+  },
+  {
+    "id": 51,
+    "label": "Learn to Dance Salsa",
+    "description": "Hot, spicy, and full of rhythm",
+    "difficulty": 7,
+    "category": "Dance"
+  },
+  {
+    "id": 52,
+    "label": "Do a Handstand",
+    "description": "Defying gravity, at least for a few seconds",
+    "difficulty": 8,
+    "category": "Fitness"
+  },
+  {
+    "id": 53,
+    "label": "Make Homemade Pasta",
+    "description": "A fresh and delicious culinary experience",
+    "difficulty": 7,
+    "category": "Food & Drink"
+  },
+  {
+    "id": 54,
+    "label": "Learn to Play Piano",
+    "description": "Tickling the ivories with your fingers",
+    "difficulty": 8,
+    "category": "Music"
+  },
+  {
+    "id": 55,
+    "label": "Go to a Comedy Show",
+    "description": "Laughter is the best medicine, unless you’re the punchline",
+    "difficulty": 2,
+    "category": "Entertainment"
+  },
+  {
+    "id": 56,
+    "label": "Build a Robot",
+    "description": "Combining tech and creativity to make something cool",
+    "difficulty": 9,
+    "category": "Technology"
+  },
+  {
+    "id": 57,
+    "label": "Go Rock Climbing",
+    "description": "A test of strength, balance, and bravery",
+    "difficulty": 9,
+    "category": "Fitness"
+  },
+  {
+    "id": 58,
+    "label": "Master a Magic Trick",
+    "description": "Misdirection, sleight of hand, and a little mystery",
+    "difficulty": 7,
+    "category": "Entertainment"
+  },
+  {
+    "id": 59,
+    "label": "Do a Puzzle",
+    "description": "Piece by piece, you complete the picture",
+    "difficulty": 6,
+    "category": "Puzzles & Games"
+  },
+  {
+    "id": 60,
+    "label": "Learn to Knit",
+    "description": "Turning yarn into cozy creations",
+    "difficulty": 6,
+    "category": "Craft"
+  },
+  {
+    "id": 61,
+    "label": "Take a Road Trip",
+    "description": "The adventure is as much about the journey as the destination",
+    "difficulty": 5,
+    "category": "Travel"
+  },
+  {
+    "id": 62,
+    "label": "Learn Sign Language",
+    "description": "Communicating without words",
+    "difficulty": 8,
+    "category": "Language"
+  },
+  {
+    "id": 63,
+    "label": "Clean the Entire House",
+    "description": "An all-day endeavor to reset your living space",
+    "difficulty": 7,
+    "category": "Household"
+  },
+  {
+    "id": 64,
+    "label": "Attend a Music Festival",
+    "description": "Days of live music, dancing, and probably sunburn",
+    "difficulty": 3,
+    "category": "Entertainment"
+  },
+  {
+    "id": 65,
+    "label": "Do a Backflip",
+    "description": "Gravity defiance in its most acrobatic form",
+    "difficulty": 9,
+    "category": "Fitness"
+  },
+  {
+    "id": 66,
+    "label": "Make Homemade Pizza",
+    "description": "Cheesy, crispy, and made exactly how you like it",
+    "difficulty": 6,
+    "category": "Food & Drink"
+  },
+  {
+    "id": 67,
+    "label": "Build a Lego Set",
+    "description": "A structured form of play with colorful bricks",
+    "difficulty": 5,
+    "category": "Craft"
+  },
+  {
+    "id": 68,
+    "label": "Learn to Code in Python",
+    "description": "A beginner-friendly yet powerful language",
+    "difficulty": 6,
+    "category": "Technology"
+  },
+  {
+    "id": 69,
+    "label": "Attend a Paint and Sip Class",
+    "description": "Painting with a drink in hand for artistic inspiration",
+    "difficulty": 4,
+    "category": "Creative"
+  },
+  {
+    "id": 70,
+    "label": "Take a Cooking Class",
+    "description": "A delicious way to learn new culinary skills",
+    "difficulty": 7,
+    "category": "Food & Drink"
+  },
+  {
+    "id": 71,
+    "label": "Go Skiing",
+    "description": "Speeding down snowy slopes with grace... or tumbles",
+    "difficulty": 8,
+    "category": "Outdoor"
+  },
+  {
+    "id": 72,
+    "label": "Do a Book Club",
+    "description": "Discussing literature, with or without wine",
+    "difficulty": 4,
+    "category": "Social"
+  },
+  {
+    "id": 73,
+    "label": "Run a 5K",
+    "description": "A shorter yet still challenging race",
+    "difficulty": 7,
+    "category": "Fitness"
+  },
+  {
+    "id": 74,
+    "label": "Attend a Live Sports Event",
+    "description": "Cheering on your favorite team in person",
+    "difficulty": 2,
+    "category": "Entertainment"
+  },
+  {
+    "id": 75,
+    "label": "Play Volleyball",
+    "description": "A beach or court game of bump, set, and spike",
+    "difficulty": 6,
+    "category": "Fitness"
+  },
+  {
+    "id": 76,
+    "label": "Bake Cookies",
+    "description": "Sweet, bite-sized treats fresh from the oven",
+    "difficulty": 5,
+    "category": "Food & Drink"
+  },
+  {
+    "id": 77,
+    "label": "Learn Archery",
+    "description": "Hitting a bullseye from a distance",
+    "difficulty": 7,
+    "category": "Outdoor"
+  },
+  {
+    "id": 78,
+    "label": "Take a Dance Class",
+    "description": "Learning new moves, one step at a time",
+    "difficulty": 6,
+    "category": "Dance"
+  },
+  {
+    "id": 79,
+    "label": "Learn Calligraphy",
+    "description": "The art of beautiful handwriting",
+    "difficulty": 7,
+    "category": "Craft"
+  },
+  {
+    "id": 80,
+    "label": "Go to a Concert",
+    "description": "Live music and the energy of the crowd",
+    "difficulty": 2,
+    "category": "Entertainment"
+  },
+  {
+    "id": 81,
+    "label": "Learn to Fly a Drone",
+    "description": "Navigating the skies with a remote control",
+    "difficulty": 6,
+    "category": "Technology"
+  },
+  {
+    "id": 82,
+    "label": "Learn to Make Cocktails",
+    "description": "Mixing drinks like a pro bartender",
+    "difficulty": 7,
+    "category": "Food & Drink"
+  },
+  {
+    "id": 83,
+    "label": "Make a Scrapbook",
+    "description": "Preserving memories with a creative touch",
+    "difficulty": 6,
+    "category": "Craft"
+  },
+  {
+    "id": 84,
+    "label": "Take a Photography Class",
+    "description": "Capturing moments with perfect framing and lighting",
+    "difficulty": 7,
+    "category": "Creative"
+  },
+  {
+    "id": 85,
+    "label": "Do a Charity Run",
+    "description": "Running for a good cause",
+    "difficulty": 6,
+    "category": "Fitness"
+  },
+  {
+    "id": 86,
+    "label": "Learn to Sail",
+    "description": "Navigating the waters by wind and skill",
+    "difficulty": 8,
+    "category": "Outdoor"
+  },
+  {
+    "id": 87,
+    "label": "Try Paddleboarding",
+    "description": "Balance and paddling across calm waters",
+    "difficulty": 6,
+    "category": "Outdoor"
+  },
+  {
+    "id": 88,
+    "label": "Build a Gingerbread House",
+    "description": "An edible and festive construction project",
+    "difficulty": 5,
+    "category": "Craft"
+  },
+  {
+    "id": 89,
+    "label": "Do a Digital Detox",
+    "description": "Unplugging from screens for a day",
+    "difficulty": 7,
+    "category": "Wellness"
+  },
+  {
+    "id": 90,
+    "label": "Attend a Dance Party",
+    "description": "Let loose and dance the night away",
+    "difficulty": 3,
+    "category": "Social"
+  },
+  {
+    "id": 91,
+    "label": "Learn to Make Pottery",
+    "description": "Shaping clay into art or functional pieces",
+    "difficulty": 8,
+    "category": "Craft"
+  },
+  {
+    "id": 92,
+    "label": "Take a Hot Air Balloon Ride",
+    "description": "Soaring through the skies for a breathtaking view",
+    "difficulty": 2,
+    "category": "Travel"
+  },
+  {
+    "id": 93,
+    "label": "Take a Boxing Class",
+    "description": "Punching your way to fitness",
+    "difficulty": 8,
+    "category": "Fitness"
+  },
+  {
+    "id": 94,
+    "label": "Learn to Surf",
+    "description": "Riding the waves with balance and style",
+    "difficulty": 9,
+    "category": "Outdoor"
+  },
+  {
+    "id": 95,
+    "label": "Go to a Zoo",
+    "description": "Observing the animal kingdom up close",
+    "difficulty": 2,
+    "category": "Leisure"
+  },
+  {
+    "id": 96,
+    "label": "Fly a Kite",
+    "description": "Harnessing the wind for some high-flying fun",
+    "difficulty": 3,
+    "category": "Outdoor"
+  },
+  {
+    "id": 97,
+    "label": "Learn to Make Jewelry",
+    "description": "Creating beautiful accessories from scratch",
+    "difficulty": 7,
+    "category": "Craft"
+  },
+  {
+    "id": 98,
+    "label": "Go to a Theme Park",
+    "description": "Rides, games, and probably some overpriced snacks",
+    "difficulty": 3,
+    "category": "Entertainment"
+  },
+  {
+    "id": 99,
+    "label": "Go to an Art Museum",
+    "description": "A cultural experience of creativity and history",
+    "difficulty": 2,
+    "category": "Leisure"
+  },
+  {
+    "id": 100,
+    "label": "Learn to Make Sushi",
+    "description": "The art of rolling your own Japanese cuisine",
+    "difficulty": 8,
+    "category": "Food & Drink"
+  }
 ]

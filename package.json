@@ -4,6 +4,7 @@
   "main": "src/index.ts",
   "scripts": {
     "clean": "rimraf ./dist",
+    "build": "deno fmt && deno task build:doc",
     "build:doc": "webpack build --config webpack.config.js --mode production",
     "dev:doc": "webpack-dev-server --config webpack.config.js --mode development",
     "dev": "deno run --allow-all ./node_modules/.bin/concurrently --kill-others \"deno --allow-all --watch src/index.ts\" \"deno task dev:doc\"",
