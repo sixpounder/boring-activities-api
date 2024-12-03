@@ -1,12 +1,13 @@
+import type { NextFunction, Request, Response } from "express";
 import { lowerCase, toNumber } from "lodash-es";
-import ActivityService from "../services/activity.ts";
 import { getPageable } from "../lib/request.ts";
-import { NextFunction, Request, Response } from "express";
+import type { Activity } from "../model/activity.ts";
+import type ActivityService from "../services/activity.ts";
 
 export default class ActivitiesController {
   private activitiesService: ActivityService;
 
-  constructor(activitiesService) {
+  constructor(activitiesService: ActivityService) {
     this.activitiesService = activitiesService;
   }
 
@@ -21,8 +22,8 @@ export default class ActivitiesController {
 
   async findByCategory(req: Request, res: Response, _next: NextFunction) {
     res.json(
-      await this.activitiesService.getBy((a) =>
-        lowerCase(a.category) === lowerCase(req.params.category)
+      await this.activitiesService.getBy((activity: Activity) =>
+        lowerCase(activity.category) === lowerCase(req.params.category)
       ),
     );
   }
@@ -35,7 +36,7 @@ export default class ActivitiesController {
       return;
     }
 
-    const item = await this.activitiesService.getById(id);
+    const item: Activity = await this.activitiesService.getById(id);
     if (item) {
       res.json(item);
     } else {
