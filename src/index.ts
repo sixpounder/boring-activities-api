@@ -19,8 +19,12 @@ const app = express();
 const port = 8080;
 
 const ROLE_HEADER_KEY = "ba-role";
-const MAGIC_ROLES: string[] = (process.env.BA_MAGIC_ROLES ?? "").split(",").map(s => s.trim());
-console.info(`Detected ${MAGIC_ROLES.length} magic roles. These will be matched agains ${ROLE_HEADER_KEY} header, if available.`);
+const MAGIC_ROLES: string[] = (process.env.BA_MAGIC_ROLES ?? "").split(",").map(
+  (s) => s.trim(),
+);
+console.info(
+  `Detected ${MAGIC_ROLES.length} magic roles. These will be matched agains ${ROLE_HEADER_KEY} header, if available.`,
+);
 
 app.use(morgan("dev") as RequestHandler);
 app.use(compression() as RequestHandler);

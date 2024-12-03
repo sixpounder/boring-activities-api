@@ -1,19 +1,35 @@
+import { createRequire } from "node:module";
+const require = createRequire(import.meta.url);
+
 const path = require("path");
-const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 const sourcePath = path.resolve("src", "doc");
 const exportPath = path.resolve("dist", "public");
 
-module.exports = {
+export default {
   devtool: "source-map",
   entry: path.resolve(sourcePath, "main.tsx"),
   output: {
     path: exportPath,
-    filename: "app.js",
+    filename: "[name].[contenthash].js",
+    chunkFilename: "[name].[contenthash].bundle.js",
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        reactVendor: {
+          test: /[\\/]node_modules[\\/](react|react-dom|react-router-dom)[\\/]/,
+          name: "vendor-react",
+          chunks: "all",
+        },
+      },
+    },
   },
   devServer: {
     compress: true,
@@ -75,6 +91,11 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "main.css",
       chunkFilename: "main.css",
+    }),
+    new BundleAnalyzerPlugin({
+      generateStatsFile: true,
+      openAnalyzer: false,
+      analyzerMode: "json",
     }),
   ],
 };

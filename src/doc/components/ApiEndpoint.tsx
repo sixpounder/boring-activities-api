@@ -1,7 +1,6 @@
 import { PropsWithChildren, useEffect, useMemo, useState } from "react";
 import { Pill } from "./widgets/Pill";
 import { ulid } from "ulid";
-import { motion } from "framer-motion";
 import { Highlight } from "./widgets/Highlight";
 import { Activity } from "../../model/activity";
 import { isNull, startCase } from "lodash-es";
@@ -204,13 +203,7 @@ export const ApiEndpoint = (
 
       {isExpanded &&
         (
-          <motion.div
-            initial={{ opacity: 0, y: -5 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -5 }}
-            transition={{ duration: 0.3 }}
-            className="endpoint-inter mt-4"
-          >
+          <div className="endpoint-inter mt-4">
             {renderForm()}
 
             {!isNull(formattedResponse) && (
@@ -218,7 +211,7 @@ export const ApiEndpoint = (
                 {formattedResponse}
               </Highlight>
             )}
-          </motion.div>
+          </div>
         )}
     </div>
   );
