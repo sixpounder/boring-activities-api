@@ -1,10 +1,5 @@
 import { resolve } from "node:path";
-import express, {
-  NextFunction,
-  Request,
-  RequestHandler,
-  Response,
-} from "express";
+import express, { RequestHandler } from "express";
 import helmet from "helmet";
 import compression from "compression";
 import cors from "cors";
@@ -14,6 +9,7 @@ import ActivitiesController from "./controllers/activities.ts";
 import ActivityService from "./services/activity.ts";
 import ActivityRepository from "./repository/activity.ts";
 import { bind, isString } from "lodash-es";
+import process from "node:process";
 
 const app = express();
 const port = 8080;

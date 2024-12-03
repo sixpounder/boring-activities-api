@@ -1,6 +1,6 @@
 import { ApiDoc } from "./components/ApiDoc";
 import "./styles/main.css";
-import "highlight.js/styles/night-owl.css"
+import "highlight.js/styles/night-owl.css";
 
 async function init() {
   const React = await import("react");
