@@ -16,6 +16,8 @@ export const Highlight = (
   }, [children]);
 
   return (
-    <pre ref={codeElement}><code className={className}>{children}</code></pre>
+    <div className={`max-h-[600px] overflow-auto ${className}`}>
+      <pre ref={codeElement}><code className="rounded rounded-md">{children}</code></pre>
+    </div>
   );
 };
