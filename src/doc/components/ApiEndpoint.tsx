@@ -260,7 +260,7 @@ export const ApiEndpoint = (
             {renderForm()}
 
             {!isNull(formattedData) && (
-              <Highlight className="rounded-lg language-json p-4 mt-4">
+              <Highlight className="rounded-lg language-json mt-4">
                 {formattedData}
               </Highlight>
             )}

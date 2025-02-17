@@ -1,6 +1,6 @@
 import hljs from "highlight.js/lib/core";
 import json from "highlight.js/lib/languages/json";
-import React, { PropsWithChildren, useEffect, useRef } from "react";
+import { PropsWithChildren, useEffect, useRef } from "react";
 
 hljs.registerLanguage("json", json);
 
@@ -16,8 +16,8 @@ export const Highlight = (
   }, [children]);
 
   return (
-    <div className={`max-h-[600px] overflow-auto ${className}`}>
-      <pre ref={codeElement}><code className="rounded rounded-md">{children}</code></pre>
+    <div className={`max-h-[600px] overflow-auto rounded-md ${className}`}>
+      <pre ref={codeElement}><code>{children}</code></pre>
     </div>
   );
 };
