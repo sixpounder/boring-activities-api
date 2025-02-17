@@ -1,9 +1,16 @@
-import { PropsWithChildren, useEffect, useMemo, useState } from "react";
+import {
+  ChangeEvent,
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { Pill } from "./widgets/Pill";
 import { ulid } from "ulid";
 import { Highlight } from "./widgets/Highlight";
-import { Activity } from "../../model/activity";
-import { isNull, startCase } from "lodash-es";
+import { isNull, startCase, uniqBy } from "lodash-es";
+import { useQuery, useQueryClient } from "react-query";
 
 type HttpVerb = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 
@@ -27,6 +34,8 @@ export const ApiEndpoint = (
   { href, verb, expanded = false, description = "", queryParams = [] }:
     PropsWithChildren<ApiEndpointProps>,
 ) => {
+  const componentId = useMemo(ulid, []);
+
   function tintFor(verb: HttpVerb): "green" | "red" | "orange" | "blue" {
     switch (verb) {
       case "GET":
@@ -44,12 +53,8 @@ export const ApiEndpoint = (
 
   const [isExpanded, setExpanded] = useState(expanded);
   const [firstExpansion, setFirstExpansion] = useState(false);
-  const [sampleResponse, setSampleResponse] = useState<Activity | Activity[]>(
-    null,
-  );
-  const [formattedResponse, setFormattedResponse] = useState(null);
 
-  const [variables, _setVariables] = useState<
+  const [variables, setVariables] = useState<
     VariableLike[]
   >([]);
 
@@ -93,12 +98,6 @@ export const ApiEndpoint = (
       return acc;
     }, []).slice(0, -1), [href]);
 
-  useEffect(() => {
-    if (!isNull(sampleResponse)) {
-      setFormattedResponse(JSON.stringify(sampleResponse, null, 2));
-    }
-  }, [sampleResponse]);
-
   async function toggleExpand(
     _event: React.MouseEvent<HTMLElement>,
   ): Promise<void> {
@@ -107,44 +106,72 @@ export const ApiEndpoint = (
     if (nextState && !firstExpansion) {
       setFirstExpansion(true);
       if (variables.length === 0) {
-        fetchApi();
+        fetchEndpoint();
       }
     }
   }
 
-  async function fetchApi() {
-    try {
-      let url = actualizedUrl();
-      if (queryParams.length) {
-        url += "?" + queryParams.reduce((acc, item) => {
-          acc.append(item.name, item.value);
-          return acc;
-        }, new URLSearchParams());
-      }
-      const response = await fetch(url);
-      const body: Activity[] = await response.json();
-      setSampleResponse(body);
-    } catch (e) {
-      setSampleResponse(e.message);
-    }
-  }
-
-  function actualizedUrl() {
+  // The current URL with variables replaces
+  const actualizedUrl = useMemo(() => {
     let url = href;
     variables.forEach((element) => {
       url = url.replace(element.placeholder, element.value);
     });
 
     return url;
-  }
+  }, [href, variables]);
+
+  const { data, error, isFetching, refetch } = useQuery({
+    queryKey: componentId,
+    queryFn: async ({ signal }) => {
+      let url = actualizedUrl;
+      if (queryParams.length) {
+        url += "?" + queryParams.reduce((acc, item) => {
+          acc.append(item.name, item.value);
+          return acc;
+        }, new URLSearchParams());
+      }
+      const response = await fetch(url, { signal });
+      return response.json();
+    },
+    enabled: false,
+  });
+
+  const fetchEndpoint = async () => {
+    return refetch();
+  };
+
+  const formattedData = useMemo(() => {
+    return data ? JSON.stringify(data, null, 2) : null;
+  }, [data]);
+
+  const onVariableChange = useCallback(
+    (variable: VariableLike, event: ChangeEvent<HTMLInputElement>) => {
+      setVariables((oldVariables) => {
+        return uniqBy([{
+          name: variable.name,
+          placeholder: variable.placeholder,
+          value: event.target.value,
+        }, ...oldVariables], "name");
+      });
+    },
+    [],
+  );
+
+  const onQueryParamChange = useCallback(
+    (param: VariableLike, event: ChangeEvent<HTMLInputElement>) => {
+      param.value = event.target.value;
+    },
+    [],
+  );
 
   function renderForm() {
-    const allVariables = variables.concat(queryParams);
-    if (allVariables.length) {
+    const hasSomethingToShow = queryParams.length + variables.length !== 0;
+    if (hasSomethingToShow) {
       return (
         <>
-          <form onSubmit={fetchApi}>
-            {allVariables.map((v) => {
+          <form onSubmit={fetchEndpoint}>
+            {variables.map((v) => {
               return (
                 <div
                   key={`variable-${v.name}-label`}
@@ -158,7 +185,30 @@ export const ApiEndpoint = (
                     key={`variable-${v.name}`}
                     type="text"
                     defaultValue={v.value}
-                    onChange={(event) => v.value = event.target.value}
+                    onChange={(event) => onVariableChange(v, event)}
+                    placeholder={startCase(v.name)}
+                    className="shadow border rounded w-full py-2 px-3 dark:border-slate-600 dark:bg-slate-700 bg-cyan-100 border-cyan-600 bg-opacity-35 dark:text-gray-200 text-neutral-800 leading-tight focus:outline-none focus:shadow-outline"
+                  >
+                  </input>
+                </div>
+              );
+            })}
+
+            {queryParams.map((v) => {
+              return (
+                <div
+                  key={`variable-${v.name}-label`}
+                  className="flex flex-row items-center space-x-4 mt-4"
+                >
+                  <label className="w-32" htmlFor={`variable-${v.name}`}>
+                    {startCase(v.name)}
+                  </label>
+                  <input
+                    id={`variable-${v.name}`}
+                    key={`variable-${v.name}`}
+                    type="text"
+                    defaultValue={v.value}
+                    onChange={(event) => onQueryParamChange(v, event)}
                     placeholder={startCase(v.name)}
                     className="shadow border rounded w-full py-2 px-3 dark:border-slate-600 dark:bg-slate-700 bg-cyan-100 border-cyan-600 bg-opacity-35 dark:text-gray-200 text-neutral-800 leading-tight focus:outline-none focus:shadow-outline"
                   >
@@ -169,9 +219,10 @@ export const ApiEndpoint = (
             <button
               type="submit"
               className="btn mt-4"
+              disabled={isFetching}
               onClick={(e) => {
                 e.preventDefault();
-                fetchApi();
+                fetchEndpoint();
               }}
             >
               Send request
@@ -180,7 +231,9 @@ export const ApiEndpoint = (
         </>
       );
     } else {
-      return <button className="btn" onClick={fetchApi}>Send request</button>;
+      return (
+        <button className="btn" onClick={fetchEndpoint}>Send request</button>
+      );
     }
   }
 
@@ -206,9 +259,9 @@ export const ApiEndpoint = (
           <div className="endpoint-inter mt-4">
             {renderForm()}
 
-            {!isNull(formattedResponse) && (
+            {!isNull(formattedData) && (
               <Highlight className="rounded-lg language-json p-4 mt-4">
-                {formattedResponse}
+                {formattedData}
               </Highlight>
             )}
           </div>
