@@ -219,7 +219,7 @@ export const ApiEndpoint = (
             <Suspense>
               {is2xx(responseStatus) && !isNull(formattedData)
                 ? (
-                  <Highlight className="rounded-lg language-json mt-4">
+                  <Highlight className="rounded-lg mt-4">
                     {formattedData}
                   </Highlight>
                 )
