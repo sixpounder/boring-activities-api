@@ -89,8 +89,8 @@ export default {
       template: path.resolve(sourcePath, "index.html"),
     }),
     new MiniCssExtractPlugin({
-      filename: "main.css",
-      chunkFilename: "main.css",
+      filename: "[name].[contenthash].css",
+      chunkFilename: "[name].[chunkhash].css",
     }),
     new BundleAnalyzerPlugin({
       generateStatsFile: true,

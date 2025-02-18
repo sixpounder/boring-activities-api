@@ -1,16 +1,19 @@
 import {
   ChangeEvent,
+  lazy,
   PropsWithChildren,
+  Suspense,
   useCallback,
-  useEffect,
   useMemo,
   useState,
 } from "react";
 import { Pill } from "./widgets/Pill";
 import { ulid } from "ulid";
-import { Highlight } from "./widgets/Highlight";
-import { isNull, startCase, uniqBy } from "lodash-es";
-import { useQuery, useQueryClient } from "react-query";
+import { isNull, uniqBy } from "lodash-es";
+import { useQuery } from "react-query";
+import { VariableLike } from "./variables";
+import { EndpointForm } from "./widgets/EndpointForm";
+import { is2xx, is4xx } from "../comms";
 
 type HttpVerb = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 
@@ -22,13 +25,14 @@ interface ApiEndpointProps {
   queryParams?: VariableLike[];
 }
 
-interface VariableLike {
-  placeholder: string;
-  name: string;
-  value: any;
-}
-
 const pathVariableRegex = /\{([^\}\{]+)\}/gi;
+
+const Stylish404 = lazy(() => import("./widgets/Stylish404"));
+const Highlight = lazy(() =>
+  import("./widgets/Highlight").then((module) => ({
+    default: module.Highlight,
+  }))
+);
 
 export const ApiEndpoint = (
   { href, verb, expanded = false, description = "", queryParams = [] }:
@@ -53,6 +57,7 @@ export const ApiEndpoint = (
 
   const [isExpanded, setExpanded] = useState(expanded);
   const [firstExpansion, setFirstExpansion] = useState(false);
+  const [responseStatus, setResponseStatus] = useState(null);
 
   const [variables, setVariables] = useState<
     VariableLike[]
@@ -68,6 +73,9 @@ export const ApiEndpoint = (
           placeholder: matches[0],
           name: matches[0].replace("{", "").replace("}", ""),
           value: "",
+          options: {
+            type: "path",
+          },
         });
       }
       return {
@@ -132,9 +140,11 @@ export const ApiEndpoint = (
         }, new URLSearchParams());
       }
       const response = await fetch(url, { signal });
-      return response.json();
+      setResponseStatus(response.status);
+      return await response.json();
     },
     enabled: false,
+    retry: 0,
   });
 
   const fetchEndpoint = async () => {
@@ -147,20 +157,20 @@ export const ApiEndpoint = (
 
   const onVariableChange = useCallback(
     (variable: VariableLike, event: ChangeEvent<HTMLInputElement>) => {
-      setVariables((oldVariables) => {
-        return uniqBy([{
-          name: variable.name,
-          placeholder: variable.placeholder,
-          value: event.target.value,
-        }, ...oldVariables], "name");
-      });
-    },
-    [],
-  );
-
-  const onQueryParamChange = useCallback(
-    (param: VariableLike, event: ChangeEvent<HTMLInputElement>) => {
-      param.value = event.target.value;
+      if (variable.options?.type === "path") {
+        setVariables((oldVariables) => {
+          return uniqBy([{
+            name: variable.name,
+            placeholder: variable.placeholder,
+            value: event.target.value,
+            options: {
+              type: "path",
+            },
+          }, ...oldVariables], "name");
+        });
+      } else {
+        variable.value = event.target.value;
+      }
     },
     [],
   );
@@ -169,66 +179,13 @@ export const ApiEndpoint = (
     const hasSomethingToShow = queryParams.length + variables.length !== 0;
     if (hasSomethingToShow) {
       return (
-        <>
-          <form onSubmit={fetchEndpoint}>
-            {variables.map((v) => {
-              return (
-                <div
-                  key={`variable-${v.name}-label`}
-                  className="flex flex-row items-center space-x-4 mt-4"
-                >
-                  <label className="w-32" htmlFor={`variable-${v.name}`}>
-                    {startCase(v.name)}
-                  </label>
-                  <input
-                    id={`variable-${v.name}`}
-                    key={`variable-${v.name}`}
-                    type="text"
-                    defaultValue={v.value}
-                    onChange={(event) => onVariableChange(v, event)}
-                    placeholder={startCase(v.name)}
-                    className="shadow border rounded w-full py-2 px-3 dark:border-slate-600 dark:bg-slate-700 bg-cyan-100 border-cyan-600 bg-opacity-35 dark:text-gray-200 text-neutral-800 leading-tight focus:outline-none focus:shadow-outline"
-                  >
-                  </input>
-                </div>
-              );
-            })}
-
-            {queryParams.map((v) => {
-              return (
-                <div
-                  key={`variable-${v.name}-label`}
-                  className="flex flex-row items-center space-x-4 mt-4"
-                >
-                  <label className="w-32" htmlFor={`variable-${v.name}`}>
-                    {startCase(v.name)}
-                  </label>
-                  <input
-                    id={`variable-${v.name}`}
-                    key={`variable-${v.name}`}
-                    type="text"
-                    defaultValue={v.value}
-                    onChange={(event) => onQueryParamChange(v, event)}
-                    placeholder={startCase(v.name)}
-                    className="shadow border rounded w-full py-2 px-3 dark:border-slate-600 dark:bg-slate-700 bg-cyan-100 border-cyan-600 bg-opacity-35 dark:text-gray-200 text-neutral-800 leading-tight focus:outline-none focus:shadow-outline"
-                  >
-                  </input>
-                </div>
-              );
-            })}
-            <button
-              type="submit"
-              className="btn mt-4"
-              disabled={isFetching}
-              onClick={(e) => {
-                e.preventDefault();
-                fetchEndpoint();
-              }}
-            >
-              Send request
-            </button>
-          </form>
-        </>
+        <EndpointForm
+          disabled={isFetching}
+          variables={[...variables, ...queryParams]}
+          onSubmit={fetchEndpoint}
+          onVariableChange={onVariableChange}
+        >
+        </EndpointForm>
       );
     } else {
       return (
@@ -259,11 +216,17 @@ export const ApiEndpoint = (
           <div className="endpoint-inter mt-4">
             {renderForm()}
 
-            {!isNull(formattedData) && (
-              <Highlight className="rounded-lg language-json mt-4">
-                {formattedData}
-              </Highlight>
-            )}
+            <Suspense>
+              {is2xx(responseStatus) && !isNull(formattedData)
+                ? (
+                  <Highlight className="rounded-lg language-json mt-4">
+                    {formattedData}
+                  </Highlight>
+                )
+                : is4xx(responseStatus)
+                ? <Stylish404></Stylish404>
+                : <></>}
+            </Suspense>
           </div>
         )}
     </div>
