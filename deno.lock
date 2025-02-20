@@ -7,13 +7,12 @@
     "npm:@babel/preset-flow@^7.25.9": "7.25.9_@babel+core@7.26.0",
     "npm:@babel/preset-react@^7.25.9": "7.25.9_@babel+core@7.26.0",
     "npm:@babel/preset-typescript@^7.26.0": "7.26.0_@babel+core@7.26.0",
-    "npm:@tanstack/react-query@^5.66.7": "5.66.7_react@18.3.1",
+    "npm:@tanstack/react-query@^5.66.7": "5.66.7_react@19.0.0",
     "npm:@types/express@^4.17.21": "4.17.21",
     "npm:@types/lodash-es@^4.17.12": "4.17.12",
     "npm:@types/node@^22.7.9": "22.8.4",
-    "npm:@types/react-dom@^18.3.0": "18.3.5_@types+react@18.3.18",
-    "npm:@types/react@^18.3.0": "18.3.18",
-    "npm:@types/react@^18.3.12": "18.3.18",
+    "npm:@types/react-dom@19": "19.0.4_@types+react@19.0.10",
+    "npm:@types/react@19": "19.0.10",
     "npm:autoprefixer@^10.4.20": "10.4.20_postcss@8.4.47",
     "npm:babel-loader@^9.2.1": "9.2.1_@babel+core@7.26.0_webpack@5.95.0__acorn@8.14.0",
     "npm:babel-plugin-react-compiler@^19.0.0-beta-21e868a-20250216": "19.0.0-beta-21e868a-20250216",
@@ -36,8 +35,8 @@
     "npm:postcss-loader@^8.1.1": "8.1.1_postcss@8.4.47_webpack@5.95.0__acorn@8.14.0_typescript@5.6.3",
     "npm:postcss-preset-env@^10.0.8": "10.0.8_postcss@8.4.47",
     "npm:postcss@^8.4.47": "8.4.47",
-    "npm:react-dom@^18.3.0": "18.3.1_react@18.3.1",
-    "npm:react@^18.3.0": "18.3.1",
+    "npm:react-dom@19": "19.0.0_react@19.0.0",
+    "npm:react@19": "19.0.0",
     "npm:rimraf@^6.0.1": "6.0.1",
     "npm:style-loader@4": "4.0.0_webpack@5.95.0__acorn@8.14.0",
     "npm:tailwindcss@^3.4.14": "3.4.14_postcss@8.4.47",
@@ -1447,7 +1446,7 @@
     "@tanstack/query-core@5.66.4": {
       "integrity": "sha512-skM/gzNX4shPkqmdTCSoHtJAPMTtmIJNS0hE+xwTTUVYwezArCT34NMermABmBVUg5Ls5aiUXEDXfqwR1oVkcA=="
     },
-    "@tanstack/react-query@5.66.7_react@18.3.1": {
+    "@tanstack/react-query@5.66.7_react@19.0.0": {
       "integrity": "sha512-qd3q/tUpF2K1xItfPZddk1k/8pSXnovg41XyCqJgPoyYEirMBtB0sVEVVQ/CsAOngzgWtBPXimVf4q4kM9uO6A==",
       "dependencies": [
         "@tanstack/query-core",
@@ -1564,25 +1563,21 @@
         "undici-types"
       ]
     },
-    "@types/prop-types@15.7.14": {
-      "integrity": "sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ=="
-    },
     "@types/qs@6.9.16": {
       "integrity": "sha512-7i+zxXdPD0T4cKDuxCUXJ4wHcsJLwENa6Z3dCu8cfCK743OGy5Nu1RmAGqDPsoTDINVEcdXKRvR/zre+P2Ku1A=="
     },
     "@types/range-parser@1.2.7": {
       "integrity": "sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ=="
     },
-    "@types/react-dom@18.3.5_@types+react@18.3.18": {
-      "integrity": "sha512-P4t6saawp+b/dFrUr2cvkVsfvPguwsxtH6dNIYRllMsefqFzkZk5UIjzyDOv5g1dXIPdG4Sp1yCR4Z6RCUsG/Q==",
+    "@types/react-dom@19.0.4_@types+react@19.0.10": {
+      "integrity": "sha512-4fSQ8vWFkg+TGhePfUzVmat3eC14TXYSsiiDSLI0dVLsrm9gZFABjPy/Qu6TKgl1tq1Bu1yDsuQgY3A3DOjCcg==",
       "dependencies": [
         "@types/react"
       ]
     },
-    "@types/react@18.3.18": {
-      "integrity": "sha512-t4yC+vtgnkYjNSKlFx1jkAhH8LgTo2N/7Qvi83kdEaUtMDiwpbLAktKDaAMlRcJ5eSxZkH74eEGt1ky31d7kfQ==",
+    "@types/react@19.0.10": {
+      "integrity": "sha512-JuRQ9KXLEjaUNjTWpzuR231Z2WpIwczOkBEIvbHNCzQefFIT0L8IqE6NV6ULLyC1SI/i234JnDoMkfg+RjQj2g==",
       "dependencies": [
-        "@types/prop-types",
         "csstype"
       ]
     },
@@ -3307,12 +3302,6 @@
     "lodash@4.17.21": {
       "integrity": "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
     },
-    "loose-envify@1.4.0": {
-      "integrity": "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==",
-      "dependencies": [
-        "js-tokens"
-      ]
-    },
     "lower-case@2.0.2": {
       "integrity": "sha512-7fm3l3NAF9WfN6W3JOmf5drwpVqX78JtoGJ3A6W0a6ZnldM41w2fV5D490psKFTpMds8TJse/eHLFFsNHHjHgg==",
       "dependencies": [
@@ -4290,19 +4279,15 @@
         "unpipe"
       ]
     },
-    "react-dom@18.3.1_react@18.3.1": {
-      "integrity": "sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==",
+    "react-dom@19.0.0_react@19.0.0": {
+      "integrity": "sha512-4GV5sHFG0e/0AD4X+ySy6UJd3jVl1iNsNHdpad0qhABJ11twS3TTBnseqsKurKcsNqCEFeGL3uLpVChpIO3QfQ==",
       "dependencies": [
-        "loose-envify",
         "react",
         "scheduler"
       ]
     },
-    "react@18.3.1": {
-      "integrity": "sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==",
-      "dependencies": [
-        "loose-envify"
-      ]
+    "react@19.0.0": {
+      "integrity": "sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ=="
     },
     "read-cache@1.0.0": {
       "integrity": "sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA==",
@@ -4459,11 +4444,8 @@
     "safer-buffer@2.1.2": {
       "integrity": "sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg=="
     },
-    "scheduler@0.23.2": {
-      "integrity": "sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==",
-      "dependencies": [
-        "loose-envify"
-      ]
+    "scheduler@0.25.0": {
+      "integrity": "sha512-xFVuu11jh+xcO7JOAGJNOXld8/TcEHK/4CituBUeUb5hqxJLj9YuemAEuvm9gQ/+pgXYfbQuqAkiYu+u7YEsNA=="
     },
     "schema-utils@3.3.0_ajv@6.12.6": {
       "integrity": "sha512-pN/yOAvcC+5rQ5nERGuwrjLlYvLTbCibnZ1I7B1LaiAz9BRBlE9GMgE/eqV30P7aJQUf7Ddimy/RsbYO/GrVGg==",
@@ -5142,8 +5124,8 @@
         "npm:@types/express@^4.17.21",
         "npm:@types/lodash-es@^4.17.12",
         "npm:@types/node@^22.7.9",
-        "npm:@types/react-dom@^18.3.0",
-        "npm:@types/react@^18.3.12",
+        "npm:@types/react-dom@19",
+        "npm:@types/react@19",
         "npm:autoprefixer@^10.4.20",
         "npm:babel-loader@^9.2.1",
         "npm:babel-plugin-react-compiler@^19.0.0-beta-21e868a-20250216",
@@ -5166,8 +5148,8 @@
         "npm:postcss-loader@^8.1.1",
         "npm:postcss-preset-env@^10.0.8",
         "npm:postcss@^8.4.47",
-        "npm:react-dom@^18.3.0",
-        "npm:react@^18.3.0",
+        "npm:react-dom@19",
+        "npm:react@19",
         "npm:rimraf@^6.0.1",
         "npm:style-loader@4",
         "npm:tailwindcss@^3.4.14",

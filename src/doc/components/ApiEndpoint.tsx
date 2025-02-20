@@ -67,12 +67,12 @@ export const ApiEndpoint = (
       let matches: RegExpMatchArray;
       if (variable) {
         matches = text.match(pathVariableRegex);
-        variables.push({
+        setVariables((oldVariables) => uniqBy([{
           placeholder: matches[0],
           name: matches[0].replace("{", "").replace("}", ""),
           value: "",
           type: VariableType.PATH
-        });
+        }, ...oldVariables], "name"))
       }
       return {
         text,

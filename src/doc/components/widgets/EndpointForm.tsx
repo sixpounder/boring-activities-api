@@ -1,6 +1,6 @@
 import { defaults, groupBy, keysIn, startCase } from "lodash-es";
 import { VariableLike } from "../variables";
-import { ChangeEvent, FormEvent, useCallback } from "react";
+import { ChangeEvent, FormEvent, useCallback, useMemo } from "react";
 
 export interface EndpointFormProps {
   variables: VariableLike[];
@@ -30,14 +30,14 @@ export const EndpointForm = (props: Partial<EndpointFormProps>) => {
     onSubmit();
   }, []);
 
-  const partitionedVariables = groupBy(variables, "type");
+  const partitionedVariables = useMemo(() => groupBy(variables, "type"), [variables]);
 
   return (
     <form onSubmit={onFormSubmit}>
       {keysIn(partitionedVariables).map((k) => {
         const partition = partitionedVariables[k];
         return [
-          <h2 key={`partition-${partition}`} className="font-bold text-sm uppercase">{k}</h2>,
+          <h2 key={`partition-${k}`} className="font-bold text-sm uppercase">{k}</h2>,
           ...partition.map((v) => {
             return (
               <div
