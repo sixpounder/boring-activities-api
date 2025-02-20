@@ -1,11 +1,11 @@
 import classNames from "classnames";
 
+export type Tint = "green" | "red" | "orange" | "blue" | "purple";
+
 export interface PillProps {
   label: string;
-  tint: "green" | "red" | "orange" | "blue";
+  tint: Tint;
 }
-
-export type Tint = "green" | "red" | "orange" | "blue";
 
 export const Pill = ({ label = "", tint = "green" }: Partial<PillProps>) => {
   const colorClasses = (tint: Tint) => {
@@ -18,6 +18,8 @@ export const Pill = ({ label = "", tint = "green" }: Partial<PillProps>) => {
         tint === "orange",
       "bg-blue-100 border-blue-500 text-blue-500 dark:bg-blue-500 dark:text-blue-100":
         tint === "blue",
+      "bg-purple-100 border-purple-500 text-purple-500 dark:bg-purple-500 dark:text-purple-100":
+        tint === "purple",
     });
   };
 

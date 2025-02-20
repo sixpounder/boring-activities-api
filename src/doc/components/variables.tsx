@@ -2,5 +2,10 @@ export interface VariableLike {
   placeholder: string;
   name: string;
   value: any;
-  options?: Record<string, any>;
+  type: VariableType;
+}
+
+export enum VariableType {
+  PATH = "Path variables",
+  QUERY = "Query arguments"
 }

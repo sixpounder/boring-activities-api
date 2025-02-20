@@ -51,6 +51,10 @@ export default {
         include: sourcePath,
         loader: require.resolve("babel-loader"),
         options: {
+          // plugins: [
+          //   ["babel-plugin-react-compiler", {
+          //   }]
+          // ],
           presets: [
             [
               require.resolve("@babel/preset-flow"),

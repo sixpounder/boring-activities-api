@@ -7,15 +7,13 @@ import {
   useMemo,
   useState,
 } from "react";
-import { Pill } from "./widgets/Pill";
+import { Pill, Tint } from "./widgets/Pill";
 import { ulid } from "ulid";
 import { isNull, uniqBy } from "lodash-es";
-import { useQuery } from "react-query";
-import { VariableLike } from "./variables";
+import { useQuery } from "@tanstack/react-query";
+import { VariableLike, VariableType } from "./variables";
 import { EndpointForm } from "./widgets/EndpointForm";
-import { is2xx, is4xx } from "../comms";
-
-type HttpVerb = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+import { HttpVerb, is2xx, is4xx } from "../comms";
 
 interface ApiEndpointProps {
   href: string;
@@ -38,16 +36,16 @@ export const ApiEndpoint = (
   { href, verb, expanded = false, description = "", queryParams = [] }:
     PropsWithChildren<ApiEndpointProps>,
 ) => {
-  const componentId = useMemo(ulid, []);
+  const componentId: Readonly<string> = useMemo(ulid, []);
 
-  function tintFor(verb: HttpVerb): "green" | "red" | "orange" | "blue" {
+  function tintFor(verb: HttpVerb): Tint {
     switch (verb) {
       case "GET":
         return "blue";
       case "POST":
         return "green";
       case "PUT":
-        return "orange";
+        return "purple";
       case "PATCH":
         return "orange";
       case "DELETE":
@@ -73,9 +71,7 @@ export const ApiEndpoint = (
           placeholder: matches[0],
           name: matches[0].replace("{", "").replace("}", ""),
           value: "",
-          options: {
-            type: "path",
-          },
+          type: VariableType.PATH
         });
       }
       return {
@@ -130,7 +126,7 @@ export const ApiEndpoint = (
   }, [href, variables]);
 
   const { data, error, isFetching, refetch } = useQuery({
-    queryKey: componentId,
+    queryKey: [componentId],
     queryFn: async ({ signal }) => {
       let url = actualizedUrl;
       if (queryParams.length) {
@@ -157,15 +153,13 @@ export const ApiEndpoint = (
 
   const onVariableChange = useCallback(
     (variable: VariableLike, event: ChangeEvent<HTMLInputElement>) => {
-      if (variable.options?.type === "path") {
+      if (variable.type === VariableType.PATH) {
         setVariables((oldVariables) => {
           return uniqBy([{
             name: variable.name,
             placeholder: variable.placeholder,
             value: event.target.value,
-            options: {
-              type: "path",
-            },
+            type: VariableType.PATH
           }, ...oldVariables], "name");
         });
       } else {

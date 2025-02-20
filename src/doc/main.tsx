@@ -1,17 +1,13 @@
-import { QueryClient, QueryClientProvider } from "react-query";
+import React from "react"
+import ReactDOM from "react-dom/client"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ApiDoc } from "./components/ApiDoc";
 import "./styles/main.css";
-import "highlight.js/styles/night-owl.css";
 
-async function init() {
-  const React = await import("react");
-  const ReactDOM = await import("react-dom/client");
-  const queryClient = new QueryClient();
+function init() {
   ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
-      <QueryClientProvider client={queryClient}>
-        <ApiDoc></ApiDoc>
-      </QueryClientProvider>
+      <ApiDoc></ApiDoc>
     </React.StrictMode>,
   );
 }

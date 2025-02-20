@@ -1,6 +1,7 @@
 import hljs from "highlight.js/lib/core";
 import json from "highlight.js/lib/languages/json";
 import { PropsWithChildren, useEffect, useRef } from "react";
+import "highlight.js/styles/night-owl.css";
 
 hljs.registerLanguage("json", json);
 
