@@ -67,12 +67,14 @@ export const ApiEndpoint = (
       let matches: RegExpMatchArray;
       if (variable) {
         matches = text.match(pathVariableRegex);
-        setVariables((oldVariables) => uniqBy([{
-          placeholder: matches[0],
-          name: matches[0].replace("{", "").replace("}", ""),
-          value: "",
-          type: VariableType.PATH
-        }, ...oldVariables], "name"))
+        setVariables((oldVariables) =>
+          uniqBy([{
+            placeholder: matches[0],
+            name: matches[0].replace("{", "").replace("}", ""),
+            value: "",
+            type: VariableType.PATH,
+          }, ...oldVariables], "name")
+        );
       }
       return {
         text,
@@ -159,7 +161,7 @@ export const ApiEndpoint = (
             name: variable.name,
             placeholder: variable.placeholder,
             value: event.target.value,
-            type: VariableType.PATH
+            type: VariableType.PATH,
           }, ...oldVariables], "name");
         });
       } else {

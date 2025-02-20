@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
@@ -14,7 +15,8 @@ const exportPath = path.resolve("dist", "public");
 
 export default {
   devtool: "source-map",
-  entry: path.resolve(sourcePath, "main.tsx"),
+  context: path.resolve(sourcePath),
+  entry: "./main.tsx",
   output: {
     path: exportPath,
     filename: "[name].[contenthash].js",
@@ -52,7 +54,7 @@ export default {
         loader: require.resolve("babel-loader"),
         options: {
           plugins: [
-            ["babel-plugin-react-compiler"]
+            ["babel-plugin-react-compiler"],
           ],
           presets: [
             [
@@ -94,6 +96,11 @@ export default {
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",
       chunkFilename: "[name].[chunkhash].css",
+    }),
+    new CopyPlugin({
+      patterns: [
+        "public",
+      ],
     }),
     new BundleAnalyzerPlugin({
       generateStatsFile: true,

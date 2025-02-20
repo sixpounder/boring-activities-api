@@ -30,14 +30,18 @@ export const EndpointForm = (props: Partial<EndpointFormProps>) => {
     onSubmit();
   }, []);
 
-  const partitionedVariables = useMemo(() => groupBy(variables, "type"), [variables]);
+  const partitionedVariables = useMemo(() => groupBy(variables, "type"), [
+    variables,
+  ]);
 
   return (
     <form onSubmit={onFormSubmit}>
       {keysIn(partitionedVariables).map((k) => {
         const partition = partitionedVariables[k];
         return [
-          <h2 key={`partition-${k}`} className="font-bold text-sm uppercase">{k}</h2>,
+          <h2 key={`partition-${k}`} className="font-bold text-sm uppercase">
+            {k}
+          </h2>,
           ...partition.map((v) => {
             return (
               <div

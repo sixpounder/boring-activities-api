@@ -7,5 +7,5 @@ export interface VariableLike {
 
 export enum VariableType {
   PATH = "Path variables",
-  QUERY = "Query arguments"
+  QUERY = "Query arguments",
 }
