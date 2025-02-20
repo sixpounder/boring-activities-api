@@ -8,11 +8,11 @@ I use it for interview problems and questions. You can too, if you need it.
 
 ## Setup
 
-- `git clone https://github.com/sixpounder/boring_activities.git`
-- `cd boring_activities`
+- `git clone https://github.com/sixpounder/boring-activities-api.git`
+- `cd boring-activities-api`
 - `deno install`
 - `deno task dev` for local development, `deno task build` for a production
-  build and run
+  build of the SPA
 
 ## Endpoints
 
