@@ -1,3 +1,4 @@
+import type { JSX } from "react";
 import {
   ChangeEvent,
   lazy,
@@ -7,13 +8,15 @@ import {
   useMemo,
   useState,
 } from "react";
-import { Pill, Tint } from "./widgets/Pill";
+import type { Tint } from "./widgets/Pill";
+import { Pill } from "./widgets/Pill";
 import { ulid } from "ulid";
 import { isNull, uniqBy } from "lodash-es";
 import { useQuery } from "@tanstack/react-query";
 import { VariableLike, VariableType } from "./variables";
 import { EndpointForm } from "./widgets/EndpointForm";
-import { HttpVerb, is2xx, is4xx } from "../comms";
+import type { HttpVerb } from "../comms";
+import { is2xx, is4xx } from "../comms";
 
 interface ApiEndpointProps {
   href: string;
@@ -23,7 +26,8 @@ interface ApiEndpointProps {
   queryParams?: VariableLike[];
 }
 
-const pathVariableRegex = /\{([^\}\{]+)\}/gi;
+const pathVariableRegex = /\{([^}{]+)\}/gi;
+const EMPTY_PARAMS = []
 
 const Stylish404 = lazy(() => import("./widgets/Stylish404"));
 const Highlight = lazy(() =>
@@ -33,7 +37,7 @@ const Highlight = lazy(() =>
 );
 
 export const ApiEndpoint = (
-  { href, verb, expanded = false, description = "", queryParams = [] }:
+  { href, verb, expanded = false, description = "", queryParams = EMPTY_PARAMS }:
     PropsWithChildren<ApiEndpointProps>,
 ) => {
   const componentId: Readonly<string> = useMemo(ulid, []);
@@ -94,10 +98,10 @@ export const ApiEndpoint = (
       } else {
         return <span key={ulid()}>{chunk.text}</span>;
       }
-    }).reduce<JSX.Element[]>((acc, chunk, index) => {
+    }).reduce<JSX.Element[]>((acc, chunk) => {
       acc.push(chunk);
       acc.push(
-        <span key={`separator-${index}`} className="separator">
+        <span key={`separator-${chunk.key}`} className="separator">
           /
         </span>,
       );
@@ -127,7 +131,7 @@ export const ApiEndpoint = (
     return url;
   }, [href, variables]);
 
-  const { data, error, isFetching, refetch } = useQuery({
+  const { data, isFetching, refetch } = useQuery({
     queryKey: [componentId],
     queryFn: async ({ signal }) => {
       let url = actualizedUrl;
@@ -154,7 +158,7 @@ export const ApiEndpoint = (
   }, [data]);
 
   const onVariableChange = useCallback(
-    (variable: VariableLike, event: ChangeEvent<HTMLInputElement>) => {
+    (variable: VariableLike<unknown>, event: ChangeEvent<HTMLInputElement>) => {
       if (variable.type === VariableType.PATH) {
         setVariables((oldVariables) => {
           return uniqBy([{
@@ -185,7 +189,7 @@ export const ApiEndpoint = (
       );
     } else {
       return (
-        <button className="btn" onClick={fetchEndpoint}>Send request</button>
+        <button type="button" className="btn" onClick={fetchEndpoint}>Send request</button>
       );
     }
   }

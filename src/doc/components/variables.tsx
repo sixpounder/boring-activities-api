@@ -1,7 +1,7 @@
-export interface VariableLike {
+export interface VariableLike<T = string> {
   placeholder: string;
   name: string;
-  value: any;
+  value: T;
   type: VariableType;
 }
 

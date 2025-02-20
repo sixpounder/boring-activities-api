@@ -23,6 +23,10 @@ export default {
     chunkFilename: "[name].[contenthash].bundle.js",
   },
   optimization: {
+    minimizer: [
+      new TerserPlugin(),
+      new CssMinimizerPlugin(),
+    ],
     splitChunks: {
       cacheGroups: {
         reactVendor: {
@@ -53,9 +57,6 @@ export default {
         include: sourcePath,
         loader: require.resolve("babel-loader"),
         options: {
-          plugins: [
-            ["babel-plugin-react-compiler"],
-          ],
           presets: [
             [
               require.resolve("@babel/preset-flow"),
@@ -81,12 +82,6 @@ export default {
   },
   resolve: {
     extensions: [".*", ".js", ".jsx", ".ts", ".tsx", ".css"],
-  },
-  optimization: {
-    minimizer: [
-      new TerserPlugin(),
-      new CssMinimizerPlugin(),
-    ],
   },
   plugins: [
     new HtmlWebpackPlugin({

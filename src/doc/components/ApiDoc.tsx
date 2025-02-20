@@ -16,12 +16,12 @@ export const ApiDoc = () => {
             queryParams={[{
               placeholder: "Page",
               name: "page",
-              value: 0,
+              value: "0",
               type: VariableType.QUERY,
             }, {
               placeholder: "Page size",
               name: "pageSize",
-              value: 10,
+              value: "10",
               type: VariableType.QUERY,
             }]}
           >
