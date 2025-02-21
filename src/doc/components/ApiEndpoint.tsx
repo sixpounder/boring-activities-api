@@ -1,10 +1,10 @@
-import type { JSX } from "react";
 import {
   ChangeEvent,
   lazy,
   PropsWithChildren,
   Suspense,
   useCallback,
+  useEffect,
   useMemo,
   useState,
 } from "react";
@@ -17,6 +17,7 @@ import { VariableLike, VariableType } from "./variables";
 import { EndpointForm } from "./widgets/EndpointForm";
 import type { HttpVerb } from "../comms";
 import { is2xx, is4xx } from "../comms";
+import { Url } from "./widgets/Url";
 
 interface ApiEndpointProps {
   href: string;
@@ -27,7 +28,8 @@ interface ApiEndpointProps {
 }
 
 const pathVariableRegex = /\{([^}{]+)\}/gi;
-const EMPTY_PARAMS = []
+const EMPTY_PARAMS = [];
+const EMPTY_VARIABLES = [];
 
 const Stylish404 = lazy(() => import("./widgets/Stylish404"));
 const Highlight = lazy(() =>
@@ -37,8 +39,13 @@ const Highlight = lazy(() =>
 );
 
 export const ApiEndpoint = (
-  { href, verb, expanded = false, description = "", queryParams = EMPTY_PARAMS }:
-    PropsWithChildren<ApiEndpointProps>,
+  {
+    href,
+    verb,
+    expanded = false,
+    description = "",
+    queryParams = EMPTY_PARAMS,
+  }: PropsWithChildren<ApiEndpointProps>,
 ) => {
   const componentId: Readonly<string> = useMemo(ulid, []);
 
@@ -63,9 +70,9 @@ export const ApiEndpoint = (
 
   const [variables, setVariables] = useState<
     VariableLike[]
-  >([]);
+  >(EMPTY_VARIABLES);
 
-  const urlNode: JSX.Element[] = useMemo(() =>
+  useEffect(() => {
     href.split("/").map((text) => {
       const variable = pathVariableRegex.test(text);
       let matches: RegExpMatchArray;
@@ -85,28 +92,12 @@ export const ApiEndpoint = (
         matches,
         variable,
       };
-    }).map((chunk) => {
-      if (chunk.variable) {
-        return (
-          <span
-            key={ulid()}
-            className="variable dark:text-lime-500 text-orange-600"
-          >
-            {chunk.text}
-          </span>
-        );
-      } else {
-        return <span key={ulid()}>{chunk.text}</span>;
-      }
-    }).reduce<JSX.Element[]>((acc, chunk) => {
-      acc.push(chunk);
-      acc.push(
-        <span key={`separator-${chunk.key}`} className="separator">
-          /
-        </span>,
-      );
-      return acc;
-    }, []).slice(0, -1), [href]);
+    })
+
+    return () => {
+      setVariables(EMPTY_VARIABLES)
+    }
+  }, [href])
 
   async function toggleExpand(
     _event: React.MouseEvent<HTMLElement>,
@@ -189,7 +180,9 @@ export const ApiEndpoint = (
       );
     } else {
       return (
-        <button type="button" className="btn" onClick={fetchEndpoint}>Send request</button>
+        <button type="button" className="btn" onClick={fetchEndpoint}>
+          Send request
+        </button>
       );
     }
   }
@@ -204,7 +197,7 @@ export const ApiEndpoint = (
           <Pill label={verb} tint={tintFor(verb)}></Pill>
         </div>
         <p className="w-[calc(100%-6rem)] ml-4 md:ml-2 md:w-auto text-xl font-mono">
-          {urlNode}
+          <Url url={href}></Url>
         </p>
         <p className="!ml-24 md:!ml-2 w-auto text-gray-400 dark:text-slate-600">
           {description}

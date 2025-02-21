@@ -1,7 +1,7 @@
-import react from "@eslint-react/eslint-plugin"
+import react from "@eslint-react/eslint-plugin";
 import reactCompiler from "eslint-plugin-react-compiler";
 import js from "@eslint/js";
-import tseslint from 'typescript-eslint';
+import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   js.configs.recommended,
@@ -26,7 +26,8 @@ export default tseslint.config(
         "error",
         {
           argsIgnorePattern: "^_",
-        }
-      ]
+        },
+      ],
     },
-  });
+  },
+);
