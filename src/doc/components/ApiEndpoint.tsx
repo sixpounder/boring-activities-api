@@ -28,8 +28,8 @@ interface ApiEndpointProps {
 }
 
 const pathVariableRegex = /\{([^}{]+)\}/gi;
-const EMPTY_PARAMS = [];
-const EMPTY_VARIABLES = [];
+const EMPTY_PARAMS: VariableLike[] = [];
+const EMPTY_VARIABLES: VariableLike[] = [];
 
 const Stylish404 = lazy(() => import("./widgets/Stylish404"));
 const Highlight = lazy(() =>
@@ -66,7 +66,7 @@ export const ApiEndpoint = (
 
   const [isExpanded, setExpanded] = useState(expanded);
   const [firstExpansion, setFirstExpansion] = useState(false);
-  const [responseStatus, setResponseStatus] = useState(null);
+  const [responseStatus, setResponseStatus] = useState<number | null>(null);
 
   const [variables, setVariables] = useState<
     VariableLike[]
@@ -75,13 +75,13 @@ export const ApiEndpoint = (
   useEffect(() => {
     href.split("/").map((text) => {
       const variable = pathVariableRegex.test(text);
-      let matches: RegExpMatchArray;
+      let matches: RegExpMatchArray | null = null;
       if (variable) {
-        matches = text.match(pathVariableRegex);
+        matches = text.match(pathVariableRegex)!;
         setVariables((oldVariables) =>
           uniqBy([{
-            placeholder: matches[0],
-            name: matches[0].replace("{", "").replace("}", ""),
+            placeholder: matches![0],
+            name: matches![0].replace("{", "").replace("}", ""),
             value: "",
             type: VariableType.PATH,
           }, ...oldVariables], "name")
@@ -92,12 +92,12 @@ export const ApiEndpoint = (
         matches,
         variable,
       };
-    })
+    });
 
     return () => {
-      setVariables(EMPTY_VARIABLES)
-    }
-  }, [href])
+      setVariables(EMPTY_VARIABLES);
+    };
+  }, [href]);
 
   async function toggleExpand(
     _event: React.MouseEvent<HTMLElement>,
@@ -133,7 +133,7 @@ export const ApiEndpoint = (
         }, new URLSearchParams());
       }
       const response = await fetch(url, { signal });
-      setResponseStatus(response.status);
+      setResponseStatus(() => response.status);
       return await response.json();
     },
     enabled: false,

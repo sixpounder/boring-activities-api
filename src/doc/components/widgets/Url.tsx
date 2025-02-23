@@ -20,7 +20,7 @@ export const Url = ({ url }: UrlProps) => {
 
   const cleanupChunksDefinitions = useCallback(() => {
     setChunksDefinitions(EMPTY_CHUNKS);
-  }, [])
+  }, []);
 
   useEffect(() => {
     url.split("/").map((chunk) => {
@@ -56,7 +56,7 @@ export const Url = ({ url }: UrlProps) => {
       } else {
         return <span key={ulid()}>{chunk.text}</span>;
       }
-    })
+    });
   }, [chunksDefinitions]);
 
   return alternate(

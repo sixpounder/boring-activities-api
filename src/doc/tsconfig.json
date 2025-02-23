@@ -15,8 +15,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": [".", "../model"],
-  "references": [{
-    "path": "./tsconfig.node.json"
-  }]
+  "include": [".", "../model"]
 }
