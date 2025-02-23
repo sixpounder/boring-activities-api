@@ -1,6 +1,6 @@
 import { clamp, filter, nth, random, slice } from "lodash-es";
 import ActivityRepository from "../repository/activity.ts";
-import { Activity } from "../model/activity.ts";
+import { Activity } from "../../shared/model/activity.ts";
 
 export default class ActivityService {
   private activitiesRepository: ActivityRepository;

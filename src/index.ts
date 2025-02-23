@@ -5,9 +5,9 @@ import compression from "compression";
 import cors from "cors";
 import morgan from "morgan";
 import { rateLimit } from "express-rate-limit";
-import ActivitiesController from "./controllers/activities.ts";
-import ActivityService from "./services/activity.ts";
-import ActivityRepository from "./repository/activity.ts";
+import ActivitiesController from "./server/controllers/activities.ts";
+import ActivityService from "./server/services/activity.ts";
+import ActivityRepository from "./server/repository/activity.ts";
 import { bind, isString } from "lodash-es";
 import process from "node:process";
 
@@ -34,8 +34,8 @@ const activitiesController = new ActivitiesController(
   activitiesServiceInstance,
 );
 
-const router = express.Router();
-router.use(rateLimit({
+const apiRouter = express.Router();
+apiRouter.use(rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 100,
   standardHeaders: "draft-7",
@@ -45,24 +45,24 @@ router.use(rateLimit({
     return isString(declaredRole) && MAGIC_ROLES.includes(declaredRole);
   },
 }));
-router.get(
+apiRouter.get(
   "/api/activities",
   bind(activitiesController.find, activitiesController),
 );
-router.get(
+apiRouter.get(
   "/api/activities/:id(\\d+)",
   bind(activitiesController.findOne, activitiesController),
 );
-router.get(
+apiRouter.get(
   "/api/activities/random",
   bind(activitiesController.random, activitiesController),
 );
-router.get(
+apiRouter.get(
   "/api/activities/category/:category",
   bind(activitiesController.findByCategory, activitiesController),
 );
 
-app.use(router);
+app.use(apiRouter);
 
 app.listen(port, () => {
   console.log(`Application listening at http://localhost:${port}`);

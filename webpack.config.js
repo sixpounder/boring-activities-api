@@ -10,7 +10,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
-const sourcePath = path.resolve("src", "doc");
+const sourcePath = path.resolve("src", "frontend");
 const exportPath = path.resolve("dist", "public");
 
 export default {

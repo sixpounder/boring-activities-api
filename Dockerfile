@@ -5,7 +5,7 @@ EXPOSE 8080
 WORKDIR /app
 
 COPY . .
-RUN deno install && deno cache src/index.ts && deno task build:doc
+RUN deno install && deno cache src/index.ts && deno task build:frontend
 
 USER deno
 

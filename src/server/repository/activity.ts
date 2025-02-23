@@ -1,7 +1,7 @@
 import { filter, first, isNil } from "lodash-es";
 import { resolve } from "node:path";
 import { promises } from "node:fs";
-import { Activity } from "../model/activity.ts";
+import { Activity } from "../../shared/model/activity.ts";
 
 export default class ActivityRepository {
   private _db: Activity[];
@@ -21,7 +21,7 @@ export default class ActivityRepository {
     if (isNil(this._db)) {
       this._db = JSON.parse(
         await promises.readFile(
-          resolve("src", "resources", "db.json"),
+          resolve(import.meta.dirname, "..", "resources", "db.json"),
           "utf-8",
         ),
       );

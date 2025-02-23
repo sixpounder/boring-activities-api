@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import { lowerCase, toNumber } from "lodash-es";
 import { getPageable } from "../lib/request.ts";
-import type { Activity } from "../model/activity.ts";
+import type { Activity } from "../../shared/model/activity.ts";
 import type ActivityService from "../services/activity.ts";
 
 export default class ActivitiesController {

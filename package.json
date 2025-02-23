@@ -4,12 +4,12 @@
   "main": "src/index.ts",
   "scripts": {
     "clean": "rimraf ./dist",
-    "build": "deno fmt && deno task build:doc",
-    "build:doc": "webpack build --config webpack.config.js --mode production",
-    "build:doc:dev": "webpack-dev-server --config webpack.config.js --mode development",
+    "build": "deno fmt && deno task build:frontend",
+    "build:frontend": "webpack build --config webpack.config.js --mode production",
+    "build:frontend:dev": "webpack-dev-server --config webpack.config.js --mode development",
     "build:analyze": "webpack build --config webpack.config.js --mode development && webpack-bundle-analyzer dist/public/stats.json",
-    "dev": "deno run --allow-all ./node_modules/.bin/concurrently --kill-others \"deno --allow-all --watch src/index.ts\" \"deno task build:doc:dev\"",
-    "start": "deno run build:doc && deno --allow-all src/index.ts",
+    "dev": "deno run --allow-all ./node_modules/.bin/concurrently --kill-others \"deno --allow-all --watch src/index.ts\" \"deno task build:frontend:dev\"",
+    "start": "deno run build:frontend && deno --allow-all src/index.ts",
     "lint": "eslint ."
   },
   "author": "Andrea",
