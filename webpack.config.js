@@ -1,6 +1,7 @@
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 
+const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -12,6 +13,7 @@ const BundleAnalyzerPlugin =
 
 const sourcePath = path.resolve("src", "frontend");
 const exportPath = path.resolve("dist", "public");
+const version = require("./package.json").version ?? "?";
 
 export default {
   devtool: "source-map",
@@ -44,7 +46,7 @@ export default {
     host: "localhost",
     port: 3000,
     proxy: [{
-      context: ["/api"],
+      context: ["/api", "/health"],
       target: "http://localhost:8080",
       secure: false,
     }],
@@ -91,6 +93,9 @@ export default {
     new MiniCssExtractPlugin({
       filename: "[name].[contenthash].css",
       chunkFilename: "[name].[chunkhash].css",
+    }),
+    new webpack.DefinePlugin({
+      BA_VERSION: `"${version}"`,
     }),
     new CopyPlugin({
       patterns: [

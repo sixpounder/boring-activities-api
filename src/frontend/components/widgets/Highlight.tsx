@@ -19,7 +19,9 @@ export const Highlight = (
   }, [children]);
 
   return (
-    <div className={`max-h-[600px] overflow-auto rounded-md ${className}`}>
+    <div
+      className={`max-h-[600px] w-full overflow-auto rounded-md ${className}`}
+    >
       <pre
         ref={codeElement}
       ><code className="language-json">{children}</code></pre>

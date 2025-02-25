@@ -18,6 +18,7 @@ import { EndpointForm } from "./widgets/EndpointForm";
 import type { HttpVerb } from "../comms";
 import { is2xx, is4xx } from "../comms";
 import { Url } from "./widgets/Url";
+import Center from "./widgets/Center";
 
 interface ApiEndpointProps {
   href: string;
@@ -122,7 +123,7 @@ export const ApiEndpoint = (
     return url;
   }, [href, variables]);
 
-  const { data, isFetching, refetch } = useQuery({
+  const { data, isFetching: isLoading, refetch } = useQuery({
     queryKey: [componentId],
     queryFn: async ({ signal }) => {
       let url = actualizedUrl;
@@ -167,24 +168,15 @@ export const ApiEndpoint = (
   );
 
   function renderForm() {
-    const hasSomethingToShow = queryParams.length + variables.length !== 0;
-    if (hasSomethingToShow) {
-      return (
-        <EndpointForm
-          disabled={isFetching}
-          variables={[...variables, ...queryParams]}
-          onSubmit={fetchEndpoint}
-          onVariableChange={onVariableChange}
-        >
-        </EndpointForm>
-      );
-    } else {
-      return (
-        <button type="button" className="btn" onClick={fetchEndpoint}>
-          Send request
-        </button>
-      );
-    }
+    return (
+      <EndpointForm
+        disabled={isLoading}
+        variables={[...variables, ...queryParams]}
+        onSubmit={fetchEndpoint}
+        onVariableChange={onVariableChange}
+      >
+      </EndpointForm>
+    );
   }
 
   return (
@@ -194,7 +186,9 @@ export const ApiEndpoint = (
         onClick={toggleExpand}
       >
         <div className="w-20">
-          <Pill label={verb} tint={tintFor(verb)}></Pill>
+          <Pill tint={tintFor(verb)}>
+            {verb}
+          </Pill>
         </div>
         <p className="w-[calc(100%-6rem)] ml-4 md:ml-2 md:w-auto text-xl font-mono">
           <Url url={href}></Url>
@@ -210,15 +204,17 @@ export const ApiEndpoint = (
             {renderForm()}
 
             <Suspense>
-              {is2xx(responseStatus) && !isNull(formattedData)
-                ? (
-                  <Highlight className="rounded-lg mt-4">
-                    {formattedData}
-                  </Highlight>
-                )
-                : is4xx(responseStatus)
-                ? <Stylish404></Stylish404>
-                : <></>}
+              <Center>
+                {is2xx(responseStatus) && !isNull(formattedData)
+                  ? (
+                    <Highlight className="rounded-lg mt-4">
+                      {formattedData}
+                    </Highlight>
+                  )
+                  : is4xx(responseStatus)
+                  ? <Stylish404></Stylish404>
+                  : <></>}
+              </Center>
             </Suspense>
           </div>
         )}

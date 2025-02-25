@@ -3,12 +3,15 @@
 @tailwind utilities;
 
 html {
-  @apply text-gray-700 bg-gray-100;
+  @apply text-gray-700 bg-neutral-100;
   @apply dark:bg-slate-800 dark:text-slate-300;
   transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 .btn {
   @apply bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border
-    border-gray-400 rounded shadow;
+    border-gray-400 rounded-lg shadow;
+
+  @apply dark:bg-slate-600 dark:hover:bg-slate-700 dark:border-slate-700
+    dark:text-white dark:text-opacity-85;
 }
