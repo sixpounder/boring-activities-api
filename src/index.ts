@@ -46,23 +46,33 @@ apiRouter.use(rateLimit({
   },
 }));
 apiRouter.get(
-  "/api/activities",
+  "/activities",
   bind(activitiesController.find, activitiesController),
 );
 apiRouter.get(
-  "/api/activities/:id(\\d+)",
+  "/activities/:id(\\d+)",
   bind(activitiesController.findOne, activitiesController),
 );
 apiRouter.get(
-  "/api/activities/random",
+  "/activities/random",
   bind(activitiesController.random, activitiesController),
 );
 apiRouter.get(
-  "/api/activities/category/:category",
+  "/activities/category/:category",
   bind(activitiesController.findByCategory, activitiesController),
 );
 
-app.use(apiRouter);
+app.use("/api", apiRouter);
+
+const healthRouter = express.Router();
+healthRouter.get("/", (_req, res) => {
+  res.status(200);
+  res.json({
+    status: "UP",
+  });
+});
+
+app.use("/health", healthRouter);
 
 app.listen(port, () => {
   console.log(`Application listening at http://localhost:${port}`);
