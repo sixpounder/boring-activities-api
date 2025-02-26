@@ -80,6 +80,14 @@ export default {
           "postcss-loader",
         ],
       },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: "svg-inline-loader",
+          },
+        ],
+      },
     ],
   },
   resolve: {

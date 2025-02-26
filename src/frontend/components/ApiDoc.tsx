@@ -20,7 +20,7 @@ export const ApiDoc = () => {
       };
     },
     retry: 1,
-    refetchInterval: 10000
+    refetchInterval: 10000,
   });
 
   const serviceStatusDataLabel: "UP" | "DOWN" | "UNKNOWN" = useMemo(() => {
@@ -53,7 +53,7 @@ export const ApiDoc = () => {
         <span>Boring Activities API</span>
         <div className="flex flex-row justify-center items-center gap-x-2">
           <Pill
-            tint="purple"
+            tint="green"
             className="text-xs px-2 py-1"
           >
             Version: {BA_VERSION}
