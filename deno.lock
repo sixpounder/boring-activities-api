@@ -9,6 +9,7 @@
     "npm:@babel/preset-typescript@^7.26.0": "7.26.0_@babel+core@7.26.0",
     "npm:@eslint-react/eslint-plugin@^1.27.0": "1.27.0_eslint@9.20.1_typescript@5.6.3",
     "npm:@eslint/js@^9.20.0": "9.20.0",
+    "npm:@floating-ui/react-dom@^2.1.2": "2.1.2_react@19.0.0_react-dom@19.0.0__react@19.0.0",
     "npm:@tanstack/react-query@^5.66.7": "5.66.7_react@19.0.0",
     "npm:@types/express@^4.17.21": "4.17.21",
     "npm:@types/lodash-es@^4.17.12": "4.17.12",
@@ -1401,6 +1402,30 @@
         "@eslint/core",
         "levn"
       ]
+    },
+    "@floating-ui/core@1.6.9": {
+      "integrity": "sha512-uMXCuQ3BItDUbAMhIXw7UPXRfAlOAvZzdK9BWpE60MCn+Svt3aLn9jsPTi/WNGlRUu2uI0v5S7JiIUsbsvh3fw==",
+      "dependencies": [
+        "@floating-ui/utils"
+      ]
+    },
+    "@floating-ui/dom@1.6.13": {
+      "integrity": "sha512-umqzocjDgNRGTuO7Q8CU32dkHkECqI8ZdMZ5Swb6QAM0t5rnlrN3lGo1hdpscRd3WS8T6DKYK4ephgIH9iRh3w==",
+      "dependencies": [
+        "@floating-ui/core",
+        "@floating-ui/utils"
+      ]
+    },
+    "@floating-ui/react-dom@2.1.2_react@19.0.0_react-dom@19.0.0__react@19.0.0": {
+      "integrity": "sha512-06okr5cgPzMNBy+Ycse2A6udMi4bqwW/zgBF/rwjcNqWkyr82Mcg8b0vjX8OJpZFy/FKjJmw6wV7t44kK6kW7A==",
+      "dependencies": [
+        "@floating-ui/dom",
+        "react",
+        "react-dom"
+      ]
+    },
+    "@floating-ui/utils@0.2.9": {
+      "integrity": "sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg=="
     },
     "@humanfs/core@0.19.1": {
       "integrity": "sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA=="
@@ -5539,6 +5564,7 @@
         "npm:@babel/preset-typescript@^7.26.0",
         "npm:@eslint-react/eslint-plugin@^1.27.0",
         "npm:@eslint/js@^9.20.0",
+        "npm:@floating-ui/react-dom@^2.1.2",
         "npm:@tanstack/react-query@^5.66.7",
         "npm:@types/express@^4.17.21",
         "npm:@types/lodash-es@^4.17.12",
