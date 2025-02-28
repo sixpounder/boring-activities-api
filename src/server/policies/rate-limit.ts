@@ -1,9 +1,9 @@
 import rateLimit from "express-rate-limit";
 import { hasMagicRole } from "./roles.ts";
 
-const DEFAULT_MESSAGE = { error: 'Too many requests, please try again later.' };
+const DEFAULT_MESSAGE = { error: "Too many requests, please try again later." };
 
-export const apiMaxHitCountPerWindow = 100
+export const apiMaxHitCountPerWindow = 100;
 
 const FIFTEEN_MINUTES = 15 * 60 * 1000;
 const ONE_MINUTE = 60 * 1000;
@@ -14,8 +14,8 @@ export const apiRateLimiter = rateLimit({
   standardHeaders: "draft-7",
   legacyHeaders: false,
   skip: hasMagicRole,
-  message: DEFAULT_MESSAGE
-})
+  message: DEFAULT_MESSAGE,
+});
 
 export const defaultHealthRateLimit = rateLimit({
   windowMs: ONE_MINUTE,
@@ -23,5 +23,5 @@ export const defaultHealthRateLimit = rateLimit({
   standardHeaders: "draft-7",
   legacyHeaders: false,
   skip: hasMagicRole,
-  message: DEFAULT_MESSAGE
-})
+  message: DEFAULT_MESSAGE,
+});

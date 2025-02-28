@@ -4,23 +4,27 @@ import { getPageable } from "../lib/request.ts";
 import type { Activity } from "../../shared/model/activity.ts";
 import type ActivityService from "../services/activity.ts";
 
-export default class ActivitiesController {
+export class ActivitiesController {
   private activitiesService: ActivityService;
 
   constructor(activitiesService: ActivityService) {
     this.activitiesService = activitiesService;
   }
 
-  async find(req: Request, res: Response, _next: NextFunction) {
+  public async find(req: Request, res: Response, _next: NextFunction) {
     const [page, pageSize] = getPageable(req);
     res.json(await this.activitiesService.get(page, pageSize));
   }
 
-  async random(_req_: Request, res: Response, _next: NextFunction) {
+  public async random(_req_: Request, res: Response, _next: NextFunction) {
     res.json(await this.activitiesService.getRandom());
   }
 
-  async findByCategory(req: Request, res: Response, _next: NextFunction) {
+  public async findByCategory(
+    req: Request,
+    res: Response,
+    _next: NextFunction,
+  ) {
     res.json(
       await this.activitiesService.getBy((activity: Activity) =>
         lowerCase(activity.category) === lowerCase(req.params.category)
@@ -28,7 +32,7 @@ export default class ActivitiesController {
     );
   }
 
-  async findOne(req: Request, res: Response, _next: NextFunction) {
+  public async findOne(req: Request, res: Response, _next: NextFunction) {
     const id = toNumber(req.params.id);
     if (isNaN(id)) {
       res.status(400);

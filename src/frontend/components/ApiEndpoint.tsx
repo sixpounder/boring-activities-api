@@ -142,8 +142,8 @@ export const ApiEndpoint = (
       }
       return {
         response: parsedBody,
-        status: response.status
-      } as { response: unknown, status: number };
+        status: response.status,
+      } as { response: unknown; status: number };
     },
     enabled: false,
     retry: 0,
@@ -155,11 +155,11 @@ export const ApiEndpoint = (
 
   const fetchData = useMemo(() => {
     return data ? data.response : undefined;
-  }, [data])
+  }, [data]);
 
   const fetchStatus = useMemo(() => {
     return data ? data.status : undefined;
-  }, [data])
+  }, [data]);
 
   const formattedData = useMemo(() => {
     return fetchData ? JSON.stringify(fetchData, null, 2) : null;

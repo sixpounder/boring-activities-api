@@ -4,15 +4,17 @@ import helmet from "helmet";
 import compression from "compression";
 import cors from "cors";
 import morgan from "morgan";
-import ActivitiesController from "./server/controllers/activities.ts";
+import {
+  ActivitiesController,
+  HealthController,
+} from "./server/controllers/index.ts";
 import ActivityService from "./server/services/activity.ts";
 import ActivityRepository from "./server/repository/activity.ts";
-import { bind } from "lodash-es";
 import {
   apiRateLimiter,
   defaultHealthRateLimit,
 } from "./server/policies/rate-limit.ts";
-import { HealthController } from "./server/controllers/health.ts";
+import { inject } from "./server/lib/inject.ts";
 
 const app = express();
 const port = 8080;
@@ -24,28 +26,23 @@ app.use(cors());
 
 app.use("/", express.static(resolve("dist", "public")));
 
-const activitiesServiceInstance = new ActivityService(new ActivityRepository());
-const activitiesController = new ActivitiesController(
+const activitiesServiceInstance: ActivityService = inject(
+  ActivityService,
+  new ActivityRepository(),
+);
+const activitiesController: ActivitiesController = inject(
+  ActivitiesController,
   activitiesServiceInstance,
 );
 
 const apiRouter = express.Router({ strict: true });
 apiRouter.use(apiRateLimiter);
-apiRouter.get(
-  "/activities",
-  bind(activitiesController.find, activitiesController),
-);
-apiRouter.get(
-  "/activities/:id(\\d+)",
-  bind(activitiesController.findOne, activitiesController),
-);
-apiRouter.get(
-  "/activities/random",
-  bind(activitiesController.random, activitiesController),
-);
+apiRouter.get("/activities", activitiesController.find);
+apiRouter.get("/activities/:id(\\d+)", activitiesController.findOne);
+apiRouter.get("/activities/random", activitiesController.random);
 apiRouter.get(
   "/activities/category/:category",
-  bind(activitiesController.findByCategory, activitiesController),
+  activitiesController.findByCategory,
 );
 
 app.use("/api", apiRouter);

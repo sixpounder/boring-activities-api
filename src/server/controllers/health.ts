@@ -1,8 +1,11 @@
 import { clamp } from "lodash-es";
-import { apiMaxHitCountPerWindow, apiRateLimiter } from "../policies/rate-limit.ts";
+import {
+  apiMaxHitCountPerWindow,
+  apiRateLimiter,
+} from "../policies/rate-limit.ts";
 
 export const HealthController = {
-  index: async function (req, res) {
+  index: async (req, res) => {
     res.status(200);
 
     const limits = await apiRateLimiter.getKey(req.ip ?? "");
@@ -11,7 +14,11 @@ export const HealthController = {
       status: exceeded ? "LIMITED" : "UP",
       limits: {
         exceeded,
-        remaining: clamp(apiMaxHitCountPerWindow - (limits?.totalHits ?? 0), 0, Infinity),
+        remaining: clamp(
+          apiMaxHitCountPerWindow - (limits?.totalHits ?? 0),
+          0,
+          Infinity,
+        ),
         resetTime: limits?.resetTime,
       },
     });

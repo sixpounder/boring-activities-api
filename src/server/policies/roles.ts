@@ -13,4 +13,4 @@ console.info(
 export const hasMagicRole = (req) => {
   const declaredRole = req.header(ROLE_HEADER_KEY);
   return isString(declaredRole) && MAGIC_ROLES.includes(declaredRole);
-}
+};
