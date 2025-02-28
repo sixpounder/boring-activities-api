@@ -1,6 +1,7 @@
 import {
   ChangeEvent,
   lazy,
+  memo,
   PropsWithChildren,
   Suspense,
   useCallback,
@@ -141,9 +142,9 @@ export const ApiEndpoint = (
     retry: 0,
   });
 
-  const fetchEndpoint = async () => {
-    return refetch();
-  };
+  const fetchEndpoint = useCallback(async () => {
+    return await refetch();
+  }, []);
 
   const formattedData = useMemo(() => {
     return data ? JSON.stringify(data, null, 2) : null;
@@ -167,17 +168,7 @@ export const ApiEndpoint = (
     [],
   );
 
-  function renderForm() {
-    return (
-      <EndpointForm
-        disabled={isLoading}
-        variables={[...variables, ...queryParams]}
-        onSubmit={fetchEndpoint}
-        onVariableChange={onVariableChange}
-      >
-      </EndpointForm>
-    );
-  }
+  const MemoizedEndpointForm = memo(EndpointForm);
 
   return (
     <div className="endpoint-outer p-4 basis-0 border border-transparent rounded-lg hover:border-gray-600 cursor-pointer">
@@ -201,7 +192,13 @@ export const ApiEndpoint = (
       {isExpanded &&
         (
           <div className="endpoint-inter mt-4">
-            {renderForm()}
+            <MemoizedEndpointForm
+              disabled={isLoading}
+              variables={[...variables, ...queryParams]}
+              onSubmit={fetchEndpoint}
+              onVariableChange={onVariableChange}
+            >
+            </MemoizedEndpointForm>
 
             <Suspense>
               <Center>
