@@ -40,7 +40,7 @@ const HealthIndicator = () => {
   );
 
   const serviceStatusTint: Tint = useMemo(() => {
-    switch (serviceStatusData?.status) {
+    switch (serviceStatusDataLabel) {
       case "UP":
         return "green";
       case "DOWN":
@@ -49,7 +49,7 @@ const HealthIndicator = () => {
       default:
         return "orange";
     }
-  }, [serviceStatusData]);
+  }, [serviceStatusDataLabel]);
 
   const debouncedIsFetching = useDebounce(isFetching, 500);
 
