@@ -1,5 +1,5 @@
 import React from "react";
-import "./Stylish404.css";
+import "./Stylish4xx.css";
 
 export interface Stylish404Props {
   title: string;

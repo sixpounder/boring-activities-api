@@ -35,7 +35,7 @@ const pathVariableRegex = /\{([^}{]+)\}/gi;
 const EMPTY_PARAMS: VariableLike[] = [];
 const EMPTY_VARIABLES: VariableLike[] = [];
 
-const Stylish404 = lazy(() => import("./widgets/Stylish404"));
+const Stylish4xx = lazy(() => import("./widgets/Stylish4xx"));
 const Highlight = lazy(() =>
   import("./widgets/Highlight").then((module) => ({
     default: module.Highlight,
@@ -136,7 +136,14 @@ export const ApiEndpoint = (
         }, new URLSearchParams());
       }
       const response = await fetch(url, { signal });
-      return [await response.json(), response.status] as [Promise<unknown>, number];
+      let parsedBody: Record<string | symbol, unknown> = {};
+      if (is2xx(response.status)) {
+        parsedBody = await response.json();
+      }
+      return {
+        response: parsedBody,
+        status: response.status
+      } as { response: unknown, status: number };
     },
     enabled: false,
     retry: 0,
@@ -147,11 +154,11 @@ export const ApiEndpoint = (
   }, []);
 
   const fetchData = useMemo(() => {
-    return data ? data[0] : undefined;
+    return data ? data.response : undefined;
   }, [data])
 
   const fetchStatus = useMemo(() => {
-    return data ? data[1] : undefined;
+    return data ? data.status : undefined;
   }, [data])
 
   const formattedData = useMemo(() => {
@@ -219,7 +226,7 @@ export const ApiEndpoint = (
                     </Highlight>
                   )
                   : is4xx(fetchStatus)
-                  ? <Stylish404></Stylish404>
+                  ? <Stylish4xx></Stylish4xx>
                   : <></>}
               </Center>
             </Suspense>

@@ -18,7 +18,7 @@ export const Pill = (
         tint === "green",
       "bg-red-100 border-red-500 text-red-500 dark:bg-red-800 dark:border-red-800 dark:text-white dark:text-opacity-90":
         tint === "red",
-      "bg-orange-100 border-orange-500 text-orange-500 dark:bg-orange-800 dark:border-orange-800 dark:text-white dark:text-opacity-90":
+      "bg-orange-100 border-orange-500 text-orange-500 dark:bg-orange-600 dark:border-orange-600 dark:text-white dark:text-opacity-90":
         tint === "orange",
       "bg-blue-100 border-blue-500 text-blue-500 dark:bg-blue-600 dark:border-blue-600 dark:text-white dark:text-opacity-90":
         tint === "blue",

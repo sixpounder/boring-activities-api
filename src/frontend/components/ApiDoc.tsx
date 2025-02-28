@@ -1,55 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
 import { ApiEndpoint } from "./ApiEndpoint";
 import { VariableType } from "./variables";
-import { Pill, Tint } from "./widgets/Pill";
-import { useMemo } from "react";
-import { is5xx } from "../comms";
-import { Loading } from "./widgets/Loading";
-import { useDebounce } from "@uidotdev/usehooks";
+import { Pill } from "./widgets/Pill";
+import HealthIndicator from "./widgets/HealthIndicator";
 
 export const ApiDoc = () => {
-  const { data: serviceStatusData, isError, isFetching } = useQuery<
-    { status: "UP" | "DOWN"; responseStatus: number }
-  >({
-    queryKey: ["status"],
-    queryFn: async ({ signal }) => {
-      const result = await fetch("/health", { signal });
-      const response = await result.json();
-      return {
-        responseStatus: result.status,
-        ...response,
-      };
-    },
-    retry: 1,
-    refetchInterval: 10000,
-  });
-
-  const serviceStatusDataLabel: "UP" | "DOWN" | "UNKNOWN" = useMemo(() => {
-    if (
-      isError ||
-      serviceStatusData?.responseStatus === 404 ||
-      is5xx(serviceStatusData?.responseStatus)
-    ) {
-      return "DOWN";
-    } else {
-      return serviceStatusData?.status ? serviceStatusData.status : "UNKNOWN";
-    }
-  }, [serviceStatusData]);
-
-  const serviceStatusTint: Tint = useMemo(() => {
-    switch (serviceStatusDataLabel) {
-      case "UP":
-        return "green";
-      case "DOWN":
-        return "red";
-      case "UNKNOWN":
-      default:
-        return "orange";
-    }
-  }, [serviceStatusDataLabel]);
-
-  const debouncedIsFetching = useDebounce(isFetching, 500);
-
   return (
     <div className="container mx-auto my-4">
       <h1 className="text-4xl mb-8 text-center flex flex-col justify-center items-center gap-4">
@@ -61,14 +15,7 @@ export const ApiDoc = () => {
           >
             Version: {BA_VERSION}
           </Pill>
-          <Pill
-            tint={serviceStatusTint}
-            className="text-xs px-2 py-1"
-          >
-            {debouncedIsFetching
-              ? <Loading></Loading>
-              : `Status: ${serviceStatusDataLabel}`}
-          </Pill>
+          <HealthIndicator></HealthIndicator>
         </div>
       </h1>
       <div className="space-y-2">
