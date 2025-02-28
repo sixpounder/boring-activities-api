@@ -5,6 +5,7 @@ import { Pill, Tint } from "./widgets/Pill";
 import { useMemo } from "react";
 import { is5xx } from "../comms";
 import { Loading } from "./widgets/Loading";
+import { useDebounce } from "@uidotdev/usehooks";
 
 export const ApiDoc = () => {
   const { data: serviceStatusData, isError, isFetching } = useQuery<
@@ -47,6 +48,8 @@ export const ApiDoc = () => {
     }
   }, [serviceStatusDataLabel]);
 
+  const debouncedIsFetching = useDebounce(isFetching, 500);
+
   return (
     <div className="container mx-auto my-4">
       <h1 className="text-4xl mb-8 text-center flex flex-col justify-center items-center gap-4">
@@ -62,7 +65,7 @@ export const ApiDoc = () => {
             tint={serviceStatusTint}
             className="text-xs px-2 py-1"
           >
-            {isFetching
+            {debouncedIsFetching
               ? <Loading></Loading>
               : `Status: ${serviceStatusDataLabel}`}
           </Pill>

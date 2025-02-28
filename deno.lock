@@ -16,6 +16,7 @@
     "npm:@types/node@^22.7.9": "22.8.4",
     "npm:@types/react-dom@19": "19.0.4_@types+react@19.0.10",
     "npm:@types/react@19": "19.0.10",
+    "npm:@uidotdev/usehooks@^2.4.1": "2.4.1_react@19.0.0_react-dom@19.0.0__react@19.0.0",
     "npm:autoprefixer@^10.4.20": "10.4.20_postcss@8.4.47",
     "npm:babel-loader@^9.2.1": "9.2.1_@babel+core@7.26.0_webpack@5.95.0__acorn@8.14.0",
     "npm:babel-plugin-react-compiler@^19.0.0-beta-21e868a-20250216": "19.0.0-beta-21e868a-20250216",
@@ -2043,6 +2044,13 @@
       "dependencies": [
         "@typescript-eslint/types",
         "eslint-visitor-keys@4.2.0"
+      ]
+    },
+    "@uidotdev/usehooks@2.4.1_react@19.0.0_react-dom@19.0.0__react@19.0.0": {
+      "integrity": "sha512-1I+RwWyS+kdv3Mv0Vmc+p0dPYH0DTRAo04HLyXReYBL9AeseDWUJyi4THuksBJcu9F0Pih69Ak150VDnqbVnXg==",
+      "dependencies": [
+        "react",
+        "react-dom"
       ]
     },
     "@webassemblyjs/ast@1.12.1": {
@@ -5949,6 +5957,7 @@
         "npm:@types/node@^22.7.9",
         "npm:@types/react-dom@19",
         "npm:@types/react@19",
+        "npm:@uidotdev/usehooks@^2.4.1",
         "npm:autoprefixer@^10.4.20",
         "npm:babel-loader@^9.2.1",
         "npm:babel-plugin-react-compiler@^19.0.0-beta-21e868a-20250216",

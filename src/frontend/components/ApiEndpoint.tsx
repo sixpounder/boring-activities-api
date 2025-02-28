@@ -20,6 +20,8 @@ import type { HttpVerb } from "../comms";
 import { is2xx, is4xx } from "../comms";
 import { Url } from "./widgets/Url";
 import Center from "./widgets/Center";
+import { useDebounce } from "@uidotdev/usehooks";
+import { Loading } from "./widgets/Loading";
 
 interface ApiEndpointProps {
   href: string;
@@ -68,7 +70,6 @@ export const ApiEndpoint = (
 
   const [isExpanded, setExpanded] = useState(expanded);
   const [firstExpansion, setFirstExpansion] = useState(false);
-  const [responseStatus, setResponseStatus] = useState<number | null>(null);
 
   const [variables, setVariables] = useState<
     VariableLike[]
@@ -135,8 +136,7 @@ export const ApiEndpoint = (
         }, new URLSearchParams());
       }
       const response = await fetch(url, { signal });
-      setResponseStatus(() => response.status);
-      return await response.json();
+      return [await response.json(), response.status] as [Promise<unknown>, number];
     },
     enabled: false,
     retry: 0,
@@ -146,9 +146,17 @@ export const ApiEndpoint = (
     return await refetch();
   }, []);
 
+  const fetchData = useMemo(() => {
+    return data ? data[0] : undefined;
+  }, [data])
+
+  const fetchStatus = useMemo(() => {
+    return data ? data[1] : undefined;
+  }, [data])
+
   const formattedData = useMemo(() => {
-    return data ? JSON.stringify(data, null, 2) : null;
-  }, [data]);
+    return fetchData ? JSON.stringify(fetchData, null, 2) : null;
+  }, [fetchData]);
 
   const onVariableChange = useCallback(
     (variable: VariableLike<unknown>, event: ChangeEvent<HTMLInputElement>) => {
@@ -169,6 +177,7 @@ export const ApiEndpoint = (
   );
 
   const MemoizedEndpointForm = memo(EndpointForm);
+  const isFetchingFromAWhile = useDebounce(isLoading, 500);
 
   return (
     <div className="endpoint-outer p-4 basis-0 border border-transparent rounded-lg hover:border-gray-600 cursor-pointer">
@@ -202,13 +211,14 @@ export const ApiEndpoint = (
 
             <Suspense>
               <Center>
-                {is2xx(responseStatus) && !isNull(formattedData)
+                {isFetchingFromAWhile && <Loading></Loading>}
+                {is2xx(fetchStatus) && !isNull(formattedData)
                   ? (
                     <Highlight className="mt-4">
                       {formattedData}
                     </Highlight>
                   )
-                  : is4xx(responseStatus)
+                  : is4xx(fetchStatus)
                   ? <Stylish404></Stylish404>
                   : <></>}
               </Center>
