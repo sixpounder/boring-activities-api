@@ -6,6 +6,6 @@ export default merge(baseConfig, {
   plugins: [
     new webpack.DefinePlugin({
       BA_ENV: `"production"`,
-    })
+    }),
   ],
 });

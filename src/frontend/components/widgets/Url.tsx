@@ -9,7 +9,7 @@ export interface UrlProps {
 interface ChunkDefinition {
   text: string;
   variable: boolean;
-  matches: RegExpMatchArray;
+  matches: RegExpMatchArray | undefined;
 }
 
 const PATH_VARIABLE_REGEX = /\{([^}{]+)\}/gi;
@@ -26,7 +26,7 @@ export const Url = ({ url }: UrlProps) => {
     url.split("/").map((chunk) => {
       const variable = PATH_VARIABLE_REGEX.test(chunk);
       const matches: RegExpMatchArray | undefined = variable
-        ? chunk.match(PATH_VARIABLE_REGEX)
+        ? chunk.match(PATH_VARIABLE_REGEX) ?? undefined
         : undefined;
 
       setChunksDefinitions((existingChunks) => [

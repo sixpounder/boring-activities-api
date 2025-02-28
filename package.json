@@ -5,8 +5,9 @@
   "scripts": {
     "clean": "rimraf ./dist",
     "build": "deno fmt && deno task build:frontend",
-    "build:frontend": "webpack build --config webpack.config.js --mode production",
-    "build:frontend:dev": "webpack-dev-server --config webpack.config.dev.js --mode development",
+    "build:typecheck": "tsc -p ./src/frontend/tsconfig.build.json",
+    "build:frontend": "deno run build:typecheck && webpack build --config webpack.config.js --mode production",
+    "build:frontend:dev": "deno run build:typecheck && webpack-dev-server --config webpack.config.dev.js --mode development",
     "build:analyze": "webpack build --config webpack.config.js --mode development && webpack-bundle-analyzer dist/public/stats.json",
     "dev": "deno run --allow-all ./node_modules/.bin/concurrently --kill-others \"deno --allow-all --watch src/index.ts\" \"deno task build:frontend:dev\"",
     "start": "deno run build:frontend && deno --allow-all src/index.ts",
