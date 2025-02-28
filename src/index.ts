@@ -4,23 +4,14 @@ import helmet from "helmet";
 import compression from "compression";
 import cors from "cors";
 import morgan from "morgan";
-import { rateLimit } from "express-rate-limit";
 import ActivitiesController from "./server/controllers/activities.ts";
 import ActivityService from "./server/services/activity.ts";
 import ActivityRepository from "./server/repository/activity.ts";
-import { bind, isString } from "lodash-es";
-import process from "node:process";
+import { bind } from "lodash-es";
+import { defaultApiRateLimit, defaultHealthRateLimit } from "./server/policies/rate-limit.ts";
 
 const app = express();
 const port = 8080;
-
-const ROLE_HEADER_KEY = "ba-role";
-const MAGIC_ROLES: string[] = (process.env.BA_MAGIC_ROLES ?? "").split(",").map(
-  (s) => s.trim(),
-);
-console.info(
-  `Detected ${MAGIC_ROLES.length} magic roles. These will be matched agains ${ROLE_HEADER_KEY} header, if available.`,
-);
 
 app.use(morgan("dev") as RequestHandler);
 app.use(compression() as RequestHandler);
@@ -35,16 +26,7 @@ const activitiesController = new ActivitiesController(
 );
 
 const apiRouter = express.Router({ strict: true });
-apiRouter.use(rateLimit({
-  windowMs: 15 * 60 * 1000,
-  limit: 100,
-  standardHeaders: "draft-7",
-  legacyHeaders: false,
-  skip: (req, _res) => {
-    const declaredRole = req.header(ROLE_HEADER_KEY);
-    return isString(declaredRole) && MAGIC_ROLES.includes(declaredRole);
-  },
-}));
+apiRouter.use(defaultApiRateLimit);
 apiRouter.get(
   "/activities",
   bind(activitiesController.find, activitiesController),
@@ -65,6 +47,7 @@ apiRouter.get(
 app.use("/api", apiRouter);
 
 const healthRouter = express.Router();
+healthRouter.use(defaultHealthRateLimit)
 healthRouter.get("/", (_req, res) => {
   res.status(200);
   res.json({
