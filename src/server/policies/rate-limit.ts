@@ -1,9 +1,11 @@
 import rateLimit from "express-rate-limit";
 import { hasMagicRole } from "./roles.ts";
 
-export const defaultApiRateLimit = rateLimit({
+export const apiMaxHitCountPerWindow = 100
+
+export const apiRateLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  limit: 100,
+  limit: apiMaxHitCountPerWindow,
   standardHeaders: "draft-7",
   legacyHeaders: false,
   skip: hasMagicRole,

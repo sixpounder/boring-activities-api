@@ -8,7 +8,7 @@ import ActivitiesController from "./server/controllers/activities.ts";
 import ActivityService from "./server/services/activity.ts";
 import ActivityRepository from "./server/repository/activity.ts";
 import { bind } from "lodash-es";
-import { defaultApiRateLimit, defaultHealthRateLimit } from "./server/policies/rate-limit.ts";
+import { apiMaxHitCountPerWindow, apiRateLimiter, defaultHealthRateLimit } from "./server/policies/rate-limit.ts";
 
 const app = express();
 const port = 8080;
@@ -26,7 +26,7 @@ const activitiesController = new ActivitiesController(
 );
 
 const apiRouter = express.Router({ strict: true });
-apiRouter.use(defaultApiRateLimit);
+apiRouter.use(apiRateLimiter);
 apiRouter.get(
   "/activities",
   bind(activitiesController.find, activitiesController),
@@ -48,11 +48,19 @@ app.use("/api", apiRouter);
 
 const healthRouter = express.Router();
 healthRouter.use(defaultHealthRateLimit)
-healthRouter.get("/", (_req, res) => {
+healthRouter.get("/", async (req, res) => {
   res.status(200);
-  res.json({
-    status: "UP",
-  });
+
+  const limits = await apiRateLimiter.getKey(req.ip ?? "");
+  const exceeded = (limits?.totalHits ?? 0) > apiMaxHitCountPerWindow;
+  const response: { status: string; limits?: unknown } = {
+    status: exceeded ? "LIMITED" : "UP",
+    limits: {
+      exceeded,
+      resetTime: limits?.resetTime
+    }
+  };
+  res.json(response);
 });
 
 app.use("/health", healthRouter);
