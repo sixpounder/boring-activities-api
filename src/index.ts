@@ -34,7 +34,7 @@ const activitiesController = new ActivitiesController(
   activitiesServiceInstance,
 );
 
-const apiRouter = express.Router();
+const apiRouter = express.Router({ strict: true });
 apiRouter.use(rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 100,
