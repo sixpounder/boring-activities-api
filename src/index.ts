@@ -1,4 +1,3 @@
-import { resolve } from "node:path";
 import express, { RequestHandler } from "express";
 import helmet from "helmet";
 import compression from "compression";
@@ -15,6 +14,7 @@ import {
   defaultHealthRateLimit,
 } from "./server/policies/rate-limit.ts";
 import { inject } from "./server/lib/inject.ts";
+import { PUBLIC_DIR } from "../build/index.mjs";
 
 const app = express();
 const port = 8080;
@@ -24,7 +24,7 @@ app.use(compression() as RequestHandler);
 app.use(helmet());
 app.use(cors());
 
-app.use("/", express.static(resolve("dist", "public")));
+app.use("/", express.static(PUBLIC_DIR));
 
 const activitiesServiceInstance: ActivityService = inject(
   ActivityService,

@@ -5,12 +5,11 @@
   "scripts": {
     "clean": "rimraf ./dist",
     "build": "deno fmt && deno task build:frontend",
-    "build:typecheck": "tsc -p ./src/frontend/tsconfig.build.json",
-    "build:frontend": "deno run build:typecheck && webpack build --config webpack.config.js --mode production",
-    "build:frontend:dev": "deno run build:typecheck && webpack-dev-server --config webpack.config.dev.js --mode development",
+    "build:frontend": "webpack build --config webpack.config.js --mode production",
+    "build:frontend:dev": "webpack-dev-server --config webpack.config.dev.js --mode development",
     "build:analyze": "webpack build --config webpack.config.js --mode development && webpack-bundle-analyzer dist/public/stats.json",
     "dev": "deno run --allow-all ./node_modules/.bin/concurrently --kill-others \"deno --allow-all --watch src/index.ts\" \"deno task build:frontend:dev\"",
-    "start": "deno run build:frontend && deno --allow-all src/index.ts",
+    "start": "deno task build:frontend && deno --allow-all src/index.ts",
     "lint": "eslint ."
   },
   "author": "Andrea",
@@ -32,8 +31,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-scan": "^0.2.7",
-    "ulid": "^2.3.0",
-    "webpack-bundle-analyzer": "^4.10.2"
+    "ulid": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.9",
@@ -58,6 +56,7 @@
     "css-minimizer-webpack-plugin": "^7.0.0",
     "eslint": "^9.20.1",
     "eslint-plugin-react-compiler": "^19.0.0-beta-21e868a-20250216",
+    "fork-ts-checker-webpack-plugin": "^9.0.2",
     "html-webpack-plugin": "^5.6.3",
     "mini-css-extract-plugin": "^2.9.1",
     "postcss": "^8.4.47",
@@ -72,6 +71,7 @@
     "typescript": "^5.6.3",
     "typescript-eslint": "^8.24.1",
     "webpack": "^5.95.0",
+    "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.1.0",
     "webpack-merge": "^6.0.1"

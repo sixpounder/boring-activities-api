@@ -6,16 +6,18 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 import TerserPlugin from "terser-webpack-plugin";
 import CopyPlugin from "copy-webpack-plugin";
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import pkg from "./package.json" with { type: "json" };
+import { PUBLIC_DIR } from "./build/index.mjs";
 
 const require = createRequire(import.meta.url);
 const sourcePath = path.resolve("src", "frontend");
-const exportPath = path.resolve("dist", "public");
+const exportPath = PUBLIC_DIR;
 const version = pkg.version ?? "?";
 
 export default {
   devtool: "source-map",
-  context: path.resolve(sourcePath),
+  context: sourcePath,
   entry: "./main.tsx",
   output: {
     path: exportPath,
@@ -98,6 +100,7 @@ export default {
     extensions: [".*", ".js", ".jsx", ".ts", ".tsx", ".css"],
   },
   plugins: [
+    new ForkTsCheckerWebpackPlugin(),
     new HtmlWebpackPlugin({
       inject: true,
       template: path.resolve(sourcePath, "index.html"),
