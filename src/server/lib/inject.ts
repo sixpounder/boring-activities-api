@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { forEach, isFunction, isObject, set } from "lodash-es";
 
-type AnyCtor<T> = new (...args: any[]) => T;
-type AnyFunction<T> = (...args: any[]) => T;
+type AnyCtor<T, A> = new (...args: A[]) => T;
+type AnyFunction<T, A> = (...args: A[]) => T;
 
 /**
  * Create a new instance of `Klass` by injecting `injects` values in its
@@ -13,16 +12,16 @@ type AnyFunction<T> = (...args: any[]) => T;
  * @param injects the values to inject on the constructor
  * @returns
  */
-export function inject<T>(
-  Klass: AnyCtor<T>,
-  ...injects: any[]
+export function inject<T, A>(
+  Klass: AnyCtor<T, A>,
+  ...injects: A[]
 ): T {
   const instance = new Klass(...injects);
   if (isObject(instance)) {
     const fns = Object.getOwnPropertyNames(Klass.prototype)
       .filter((name) => isFunction(instance[name]) && name !== "constructor");
     forEach(fns, (name) => {
-      const fn: AnyFunction<any> = instance[name];
+      const fn: AnyFunction<T, A> = instance[name];
       set(instance, name, fn.bind(instance));
     });
   }
