@@ -15,6 +15,9 @@ import {
 } from "./server/policies/rate-limit.ts";
 import { inject } from "./server/lib/inject.ts";
 import { PUBLIC_DIR } from "../build/index.mjs";
+import { performance } from "node:perf_hooks";
+
+performance.mark("startup-start");
 
 const app = express();
 const port = 8080;
@@ -54,5 +57,12 @@ healthRouter.get("/", HealthController.index);
 app.use("/health", healthRouter);
 
 app.listen(port, () => {
-  console.log(`Application listening at http://localhost:${port}`);
+  performance.mark("startup-end");
+  const startupMeasure = performance.measure(
+    "startup-measure",
+    "startup-start",
+    "startup-end",
+  );
+  console.log(`Startup done in ${startupMeasure.duration}ms`);
+  console.log(`Server listening at http://localhost:${port}`);
 });
