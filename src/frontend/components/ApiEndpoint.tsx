@@ -102,9 +102,9 @@ export const ApiEndpoint = (
     };
   }, [href]);
 
-  async function toggleExpand(
+  function toggleExpand(
     _event: React.MouseEvent<HTMLElement>,
-  ): Promise<void> {
+  ): void {
     const nextState = !isExpanded;
     setExpanded(nextState);
     if (nextState && !firstExpansion) {
@@ -226,8 +226,9 @@ export const ApiEndpoint = (
                     </Highlight>
                   )
                   : is4xx(fetchStatus)
-                  ? <Stylish4xx></Stylish4xx>
-                  : <></>}
+                    ? <Stylish4xx></Stylish4xx>
+                    : <></>
+                }
               </Center>
             </Suspense>
           </div>
