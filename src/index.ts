@@ -58,7 +58,11 @@ app.use("/health", healthRouter);
 
 app.listen(port, () => {
   performance.mark("startup-end");
-  const startupMeasure = performance.measure("startup-measure", "startup-start", "startup-end");
+  const startupMeasure = performance.measure(
+    "startup-measure",
+    "startup-start",
+    "startup-end",
+  );
   console.log(`Startup done in ${startupMeasure.duration}ms`);
   console.log(`Server listening at http://localhost:${port}`);
 });

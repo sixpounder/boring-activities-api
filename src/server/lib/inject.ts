@@ -8,17 +8,17 @@ type AnyFunction<T, A> = (...args: A[]) => T;
  * constructor. If `new Klass` yields an object then this
  * also binds its methods to itself, so that it is
  * safe to use as a middleware.
- * @param Klass the type to instantiate
+ * @param klass the type to instantiate
  * @param injects the values to inject on the constructor
  * @returns
  */
 export function inject<T, A>(
-  Klass: AnyCtor<T, A>,
+  klass: AnyCtor<T, A>,
   ...injects: A[]
 ): T {
-  const instance = new Klass(...injects);
+  const instance = new klass(...injects);
   if (isObject(instance)) {
-    const fns = Object.getOwnPropertyNames(Klass.prototype)
+    const fns = Object.getOwnPropertyNames(klass.prototype)
       .filter((name) => isFunction(instance[name]) && name !== "constructor");
     forEach(fns, (name) => {
       const fn: AnyFunction<T, A> = instance[name];

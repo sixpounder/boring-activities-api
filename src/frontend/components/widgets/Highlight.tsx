@@ -23,7 +23,7 @@ export const Highlight = (
 
   return (
     <div
-      className={`relative w-full ${className}`}
+      className={`relative w-full cursor-default ${className}`}
     >
       <div className="toolbox absolute z-10 top-1 right-1 flex flex-col justify-start">
         <CopyToClipboard
@@ -34,7 +34,7 @@ export const Highlight = (
       </div>
       <div className="max-h-[600px] rounded-lg overflow-auto">
         <pre
-          className="z-0"
+          className="z-0 cursor-text"
           ref={codeElement}
         ><code className="language-json" style={{paddingRight: "2.5rem"}}>{children}</code></pre>
       </div>

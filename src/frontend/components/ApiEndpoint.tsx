@@ -226,9 +226,8 @@ export const ApiEndpoint = (
                     </Highlight>
                   )
                   : is4xx(fetchStatus)
-                    ? <Stylish4xx></Stylish4xx>
-                    : null
-                }
+                  ? <Stylish4xx></Stylish4xx>
+                  : null}
               </Center>
             </Suspense>
           </div>

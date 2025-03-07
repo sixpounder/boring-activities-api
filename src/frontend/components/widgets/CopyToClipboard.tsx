@@ -1,11 +1,21 @@
-import { debounce } from "lodash-es";
-import icon from "../../assets/copy.svg";
-import { useEffect, useState } from "react";
+import { debounce, isUndefined } from "lodash-es";
+import { PropsWithChildren, ReactElement, useEffect, useMemo, useState } from "react";
 import { useFloating } from "@floating-ui/react-dom";
+import { CopyIcon } from "./CopyIcon";
+
+interface CopytoClipboardProps {
+  className: string;
+  content: string;
+  label: string;
+  alertText: string;
+  children: ReactElement;
+}
 
 const CopyToClipboard = (
-  { className, content, label, alertText }: Partial<
-    { className: string; content: string; label: string; alertText: string }
+  { className, content, label, alertText, children }: Partial<
+    PropsWithChildren<
+      CopytoClipboardProps
+    >
   >,
 ) => {
   const [tooltipVisible, setTooltipVisible] = useState(false);
@@ -31,12 +41,18 @@ const CopyToClipboard = (
     if (tooltipVisible) {
       hideTooltip();
     }
+
+    return () => hideTooltip.cancel();
   }, [tooltipVisible]);
 
   const onClick = () => {
     navigator.clipboard.writeText(content ?? "");
     showTooltip();
   };
+
+  const hasCustomContent = useMemo(() => {
+    return !isUndefined(children);
+  }, [children]);
 
   return (
     <button
@@ -47,11 +63,7 @@ const CopyToClipboard = (
       aria-label={label ?? "Copy to clipboard"}
       onClick={onClick}
     >
-      <div
-        // eslint-disable-next-line @eslint-react/dom/no-dangerously-set-innerhtml
-        dangerouslySetInnerHTML={{ __html: icon }}
-      >
-      </div>
+      {hasCustomContent ? children : <CopyIcon></CopyIcon>}
       {tooltipVisible && (
         <div
           ref={refs.setFloating}
