@@ -10,5 +10,5 @@
     { "type": "test", "hidden": true }
   ],
   "commitUrlFormat": "https://github.com/sixpounder/boring-activities-api/commits/{{hash}}",
-  "compareUrlFormat": "https://github.com/mokkapps/boring-activities-api/compare/{{previousTag}}...{{currentTag}}"
+  "compareUrlFormat": "https://github.com/sixpounder/boring-activities-api/compare/{{previousTag}}...{{currentTag}}"
 }
