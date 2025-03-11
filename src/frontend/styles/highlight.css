@@ -1,12 +1,23 @@
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+
+code.hljs {
+  padding: 3px 5px;
+}
+
+.response {
+  background: var(--resp-bg);
+  @apply rounded-lg;
+}
+
 @media (prefers-color-scheme: light) {
-  pre code.hljs {
-    display: block;
-    overflow-x: auto;
-    padding: 1em;
+  :root {
+    --resp-bg: #d5d6db;
   }
-  code.hljs {
-    padding: 3px 5px;
-  }
+
   /*!
     Theme: Tokyo-night-light
     origin: https://github.com/enkia/tokyo-night-vscode-theme
@@ -104,7 +115,7 @@
     color: #343b58;
   }
   .hljs {
-    background: #d5d6db;
+    background: var(--resp-bg);
     color: #565a6e;
   }
   .hljs-emphasis {
@@ -116,14 +127,10 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  pre code.hljs {
-    display: block;
-    overflow-x: auto;
-    padding: 1em;
+  :root {
+    --resp-bg: #0d1117;
   }
-  code.hljs {
-    padding: 3px 5px;
-  }
+
   /*!
     Theme: GitHub Dark
     Description: Dark theme as seen on github.com
@@ -136,7 +143,7 @@
   */
   .hljs {
     color: #c9d1d9;
-    background: #0d1117;
+    background: var(--resp-bg);
   }
   .hljs-doctag,
   .hljs-keyword,

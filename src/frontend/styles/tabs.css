@@ -1,0 +1,10 @@
+.tab-label {
+  @apply text-sm px-2 py-1 rounded-md hover:bg-opacity-60;
+  @apply bg-opacity-40 bg-white;
+  @apply dark:bg-opacity-40 dark:bg-slate-500 dark:text-gray-200;
+
+  &.active {
+    @apply bg-opacity-90 border-gray-400;
+    @apply dark:bg-opacity-90 dark:border-none;
+  }
+}

@@ -12,7 +12,7 @@ import {
 import type { Tint } from "./widgets/Pill";
 import { Pill } from "./widgets/Pill";
 import { ulid } from "ulid";
-import { isNull, uniqBy } from "lodash-es";
+import { isUndefined, uniqBy } from "lodash-es";
 import { useQuery } from "@tanstack/react-query";
 import { VariableLike, VariableType } from "./variables";
 import { EndpointForm } from "./widgets/EndpointForm";
@@ -36,9 +36,9 @@ const EMPTY_PARAMS: VariableLike[] = [];
 const EMPTY_VARIABLES: VariableLike[] = [];
 
 const Stylish4xx = lazy(() => import("./widgets/Stylish4xx"));
-const Highlight = lazy(() =>
-  import("./widgets/Highlight").then((module) => ({
-    default: module.Highlight,
+const Response = lazy(() =>
+  import("./widgets/Response").then((module) => ({
+    default: module.Response,
   }))
 );
 
@@ -140,10 +140,12 @@ export const ApiEndpoint = (
       if (is2xx(response.status)) {
         parsedBody = await response.json();
       }
+
       return {
         response: parsedBody,
+        headers: response.headers,
         status: response.status,
-      } as { response: unknown; status: number };
+      } as { response: unknown; status: number; headers: Headers };
     },
     enabled: false,
     retry: 0,
@@ -153,17 +155,9 @@ export const ApiEndpoint = (
     return await refetch();
   }, []);
 
-  const fetchData = useMemo(() => {
-    return data ? data.response : undefined;
-  }, [data]);
-
   const fetchStatus = useMemo(() => {
     return data ? data.status : undefined;
   }, [data]);
-
-  const formattedData = useMemo(() => {
-    return fetchData ? JSON.stringify(fetchData, null, 2) : null;
-  }, [fetchData]);
 
   const onVariableChange = useCallback(
     (variable: VariableLike<unknown>, event: ChangeEvent<HTMLInputElement>) => {
@@ -219,11 +213,14 @@ export const ApiEndpoint = (
             <Suspense>
               <Center>
                 {isFetchingFromAWhile && <Loading></Loading>}
-                {is2xx(fetchStatus) && !isNull(formattedData)
+                {is2xx(fetchStatus) && !isUndefined(data)
                   ? (
-                    <Highlight className="mt-4">
-                      {formattedData}
-                    </Highlight>
+                    <Response
+                      data={data.response}
+                      headers={data.headers}
+                      className="mt-4"
+                    >
+                    </Response>
                   )
                   : is4xx(fetchStatus)
                   ? <Stylish4xx></Stylish4xx>

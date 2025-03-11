@@ -1,5 +1,11 @@
 import { debounce, isUndefined } from "lodash-es";
-import { PropsWithChildren, ReactElement, useEffect, useMemo, useState } from "react";
+import {
+  PropsWithChildren,
+  ReactElement,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useFloating } from "@floating-ui/react-dom";
 import { CopyIcon } from "./CopyIcon";
 

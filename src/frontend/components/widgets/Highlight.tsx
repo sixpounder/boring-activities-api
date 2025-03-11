@@ -1,16 +1,13 @@
 import hljs from "highlight.js/lib/core";
 import json from "highlight.js/lib/languages/json";
-import { PropsWithChildren, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import "../../styles/highlight.css";
-import { isString } from "lodash-es";
-import CopyToClipboard from "./CopyToClipboard";
 
 hljs.registerLanguage("json", json);
 
 export const Highlight = (
-  { children, className = "" }: PropsWithChildren<{ className?: string }>,
+  { text, className = "" }: { className?: string; text: string },
 ) => {
-  const rawText = isString(children) ? children : "";
   const codeElement = useRef<HTMLPreElement | null>(null);
 
   useEffect(() => {
@@ -19,24 +16,17 @@ export const Highlight = (
       el!.removeAttribute("data-highlighted");
       hljs.highlightElement(el!);
     }
-  }, [children]);
+  }, [text]);
 
   return (
     <div
       className={`relative w-full cursor-default ${className}`}
     >
-      <div className="toolbox absolute z-10 top-1 right-1 flex flex-col justify-start">
-        <CopyToClipboard
-          content={rawText}
-          className="dark:text-slate-300 dark:hover:text-white text-gray-500 hover:text-gray-950 text-opacity-90 transition-colors"
-        >
-        </CopyToClipboard>
-      </div>
       <div className="max-h-[600px] rounded-lg overflow-auto">
         <pre
           className="z-0 cursor-text"
           ref={codeElement}
-        ><code className="language-json" style={{paddingRight: "2.5rem"}}>{children}</code></pre>
+        ><code className="language-json" style={{paddingRight: "2.5rem"}}>{text}</code></pre>
       </div>
     </div>
   );
