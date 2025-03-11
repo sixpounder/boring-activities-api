@@ -35,6 +35,7 @@
     "npm:helmet@8": "8.0.0",
     "npm:highlight.js@^11.10.0": "11.10.0",
     "npm:html-webpack-plugin@^5.6.3": "5.6.3_webpack@5.95.0__acorn@8.14.0",
+    "npm:husky@^9.1.7": "9.1.7",
     "npm:lodash-es@^4.17.21": "4.17.21",
     "npm:mini-css-extract-plugin@^2.9.1": "2.9.1_webpack@5.95.0__acorn@8.14.0",
     "npm:morgan@^1.10.0": "1.10.0",
@@ -3755,6 +3756,9 @@
         "requires-port"
       ]
     },
+    "husky@9.1.7": {
+      "integrity": "sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA=="
+    },
     "hyperdyperid@1.2.0": {
       "integrity": "sha512-Y93lCzHYgGWdrJ66yIktxiaGULYc6oGiABxhcO5AufBeOyoIdZF7bIfLaOrbM0iGIOXQQgxxRrFEnb+Y6w1n4A=="
     },
@@ -6042,6 +6046,7 @@
         "npm:helmet@8",
         "npm:highlight.js@^11.10.0",
         "npm:html-webpack-plugin@^5.6.3",
+        "npm:husky@^9.1.7",
         "npm:lodash-es@^4.17.21",
         "npm:mini-css-extract-plugin@^2.9.1",
         "npm:morgan@^1.10.0",

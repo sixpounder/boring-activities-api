@@ -46,5 +46,5 @@ export const Tabs = ({ children, onTabChanged }: TabsProps) => {
         </div>
       </div>
     )
-    : <></>;
+    : null;
 };
