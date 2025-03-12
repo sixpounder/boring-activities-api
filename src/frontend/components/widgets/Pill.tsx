@@ -29,7 +29,7 @@ export const Pill = (
 
   return (
     <span
-      className={`block text-center text-xl px-3 py-2 select-none border rounded-lg ${
+      className={`block text-center select-none border rounded-lg ${
         colorClasses(tint)
       } ${className}`}
     >

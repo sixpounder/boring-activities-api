@@ -3,15 +3,19 @@ import { Highlight } from "./Highlight";
 import { Tabs } from "./Tabs";
 import { Tab } from "./Tab";
 import CopyToClipboard from "./CopyToClipboard";
+import { Pill, Tint } from "./Pill";
+import { is2xx, is4xx } from "../../comms";
+import { isUndefined } from "lodash-es";
 
 interface ResponseProps<T> {
+  statusCode: number;
   data: T;
   headers: Headers;
   className: string;
 }
 
 export const Response = <T,>(
-  { data, headers, className }: Partial<ResponseProps<T>>,
+  { statusCode, data, headers, className }: Partial<ResponseProps<T>>,
 ) => {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
 
@@ -46,9 +50,22 @@ export const Response = <T,>(
     }
   };
 
+  const statusCodeTint: Tint = useMemo(() => {
+    if (isUndefined(statusCode)) {
+      return "red";
+    } else if (is2xx(statusCode)) {
+      return "green";
+    } else if (is4xx(statusCode)) {
+      return "orange";
+    } else {
+      return "red";
+    }
+  }, [statusCode]);
+
   return (
     <div className={`response relative w-full ${className ?? ""}`}>
-      <div className="toolbox absolute z-10 top-1 right-1 flex flex-col justify-start">
+      <div className="toolbox absolute z-10 top-1 right-1 flex flex-row justify-start items-center gap-x-2">
+        <Pill className="text-sm px-2 py-1" tint={statusCodeTint}>{statusCode ?? "???"}</Pill>
         <CopyToClipboard
           content={exportText() ?? ""}
           className="dark:text-slate-300 dark:hover:text-white text-gray-500 hover:text-gray-950 text-opacity-90 transition-colors"

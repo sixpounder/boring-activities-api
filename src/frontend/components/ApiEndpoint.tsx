@@ -17,7 +17,7 @@ import { useQuery } from "@tanstack/react-query";
 import { VariableLike, VariableType } from "./variables";
 import { EndpointForm } from "./widgets/EndpointForm";
 import type { HttpVerb } from "../comms";
-import { is2xx, is4xx } from "../comms";
+import { is2xx } from "../comms";
 import { Url } from "./widgets/Url";
 import Center from "./widgets/Center";
 import { useDebounce } from "@uidotdev/usehooks";
@@ -35,7 +35,6 @@ const pathVariableRegex = /\{([^}{]+)\}/gi;
 const EMPTY_PARAMS: VariableLike[] = [];
 const EMPTY_VARIABLES: VariableLike[] = [];
 
-const Stylish4xx = lazy(() => import("./widgets/Stylish4xx"));
 const Response = lazy(() =>
   import("./widgets/Response").then((module) => ({
     default: module.Response,
@@ -187,7 +186,7 @@ export const ApiEndpoint = (
         onClick={toggleExpand}
       >
         <div className="w-20">
-          <Pill tint={tintFor(verb)}>
+          <Pill className="text-xl px-3 py-2" tint={tintFor(verb)}>
             {verb}
           </Pill>
         </div>
@@ -213,18 +212,16 @@ export const ApiEndpoint = (
             <Suspense>
               <Center>
                 {isFetchingFromAWhile && <Loading></Loading>}
-                {is2xx(fetchStatus) && !isUndefined(data)
-                  ? (
+                {!isUndefined(data) &&
+                  (
                     <Response
+                      statusCode={fetchStatus}
                       data={data.response}
                       headers={data.headers}
                       className="mt-4"
                     >
                     </Response>
-                  )
-                  : is4xx(fetchStatus)
-                  ? <Stylish4xx></Stylish4xx>
-                  : null}
+                  )}
               </Center>
             </Suspense>
           </div>
