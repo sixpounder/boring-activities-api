@@ -65,7 +65,9 @@ export const Response = <T,>(
   return (
     <div className={`response relative w-full ${className ?? ""}`}>
       <div className="toolbox absolute z-10 top-1 right-1 flex flex-row justify-start items-center gap-x-2">
-        <Pill className="text-sm px-2 py-1" tint={statusCodeTint}>{statusCode ?? "???"}</Pill>
+        <Pill className="text-sm px-2 py-1" tint={statusCodeTint}>
+          {statusCode ?? "???"}
+        </Pill>
         <CopyToClipboard
           content={exportText() ?? ""}
           className="dark:text-slate-300 dark:hover:text-white text-gray-500 hover:text-gray-950 text-opacity-90 transition-colors"
