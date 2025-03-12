@@ -1,6 +1,6 @@
 {
   "name": "boring_activities",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "main": "src/index.ts",
   "private": true,
   "scripts": {
