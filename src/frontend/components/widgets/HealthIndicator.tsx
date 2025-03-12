@@ -1,11 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { is5xx } from "../../comms";
 import { Pill, Tint } from "./Pill";
 import { Loading } from "./Loading";
 
-const HealthIndicator = () => {
+interface HealthIndicatorProps {
+  onStatusChanged: (status: "UP" | "DOWN" | "LIMITED" | "UNKNOWN") => void;
+}
+
+const HealthIndicator = (
+  { onStatusChanged }: Partial<HealthIndicatorProps>,
+) => {
   const { data: serviceStatusData, isError, isFetching } = useQuery<
     { status: "UP" | "DOWN" | "LIMITED"; responseStatus: number }
   >({
@@ -52,6 +58,12 @@ const HealthIndicator = () => {
   }, [serviceStatusDataLabel]);
 
   const debouncedIsFetching = useDebounce(isFetching, 500);
+
+  useEffect(() => {
+    if (onStatusChanged && serviceStatusData) {
+      onStatusChanged(serviceStatusDataLabel);
+    }
+  }, [serviceStatusDataLabel]);
 
   return (
     <Pill

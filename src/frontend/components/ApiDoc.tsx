@@ -2,8 +2,24 @@ import { ApiEndpoint } from "./ApiEndpoint";
 import { VariableType } from "./variables";
 import { Pill } from "./widgets/Pill";
 import HealthIndicator from "./widgets/HealthIndicator";
+import { useCallback, useMemo, useState } from "react";
+import { Freeze } from "./widgets/Freeze";
 
 export const ApiDoc = () => {
+  const [serviceStatus, setServiceStatus] = useState<
+    "UP" | "DOWN" | "LIMITED" | "UNKNOWN"
+  >("UNKNOWN");
+  const onServiceStatusChanged = useCallback(
+    (status: "UP" | "DOWN" | "LIMITED" | "UNKNOWN") => {
+      setServiceStatus(status);
+    },
+    [],
+  );
+
+  const serviceIsDown = useMemo(() => serviceStatus === "DOWN", [
+    serviceStatus,
+  ]);
+
   return (
     <div className="container mx-auto my-4">
       <h1 className="text-4xl mb-8 text-center flex flex-col justify-center items-center gap-4">
@@ -15,10 +31,11 @@ export const ApiDoc = () => {
           >
             Version: {BA_VERSION}
           </Pill>
-          <HealthIndicator></HealthIndicator>
+          <HealthIndicator onStatusChanged={onServiceStatusChanged}>
+          </HealthIndicator>
         </div>
       </h1>
-      <div className="space-y-2">
+      <Freeze className="space-y-2" effect="blur" enabled={serviceIsDown}>
         <ApiEndpoint
           href="/api/activities"
           verb="GET"
@@ -54,7 +71,7 @@ export const ApiDoc = () => {
           description="Get all activities by category"
         >
         </ApiEndpoint>
-      </div>
+      </Freeze>
     </div>
   );
 };
