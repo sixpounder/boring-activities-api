@@ -1,8 +1,13 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See
-[standard-version](https://github.com/conventional-changelog/standard-version)
-for commit guidelines.
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.3.0](https://github.com/sixpounder/boring-activities-api/compare/v1.2.3...v1.3.0) (2025-03-12)
+
+
+### Features
+
+* **ui:** unify response UI for all status codes ([1d09217](https://github.com/sixpounder/boring-activities-api/commits/1d09217e62e9c665ea134ecfc538d0ee41280e4b))
 
 ### [1.2.4](https://github.com/sixpounder/boring-activities-api/compare/v1.2.2...v1.2.3) (2025-03-11)
 
