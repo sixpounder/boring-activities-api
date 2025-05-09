@@ -1,14 +1,17 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file. See
+[standard-version](https://github.com/conventional-changelog/standard-version)
+for commit guidelines.
 
 ## [1.4.0](https://github.com/sixpounder/boring-activities-api/compare/v1.3.0...v1.4.0) (2025-05-09)
 
-
 ### Features
 
-* disable health calls when app is not in foreground ([21eec17](https://github.com/sixpounder/boring-activities-api/commits/21eec17267c7a85c12099f70cb9c07fc2648e194))
-* **ui:** disable the UI when API status is DOWN ([9e3eee5](https://github.com/sixpounder/boring-activities-api/commits/9e3eee592b3e1d9956c14c74514a290dcb803ff3))
+- disable health calls when app is not in foreground
+  ([21eec17](https://github.com/sixpounder/boring-activities-api/commits/21eec17267c7a85c12099f70cb9c07fc2648e194))
+- **ui:** disable the UI when API status is DOWN
+  ([9e3eee5](https://github.com/sixpounder/boring-activities-api/commits/9e3eee592b3e1d9956c14c74514a290dcb803ff3))
 
 ## [1.3.0](https://github.com/sixpounder/boring-activities-api/compare/v1.2.3...v1.3.0) (2025-03-12)
 
