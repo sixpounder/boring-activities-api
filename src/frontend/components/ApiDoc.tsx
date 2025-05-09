@@ -2,13 +2,22 @@ import { ApiEndpoint } from "./ApiEndpoint";
 import { VariableType } from "./variables";
 import { Pill } from "./widgets/Pill";
 import HealthIndicator from "./widgets/HealthIndicator";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Freeze } from "./widgets/Freeze";
+
+function documentIsVisible() {
+  return document.visibilityState === "visible";
+}
 
 export const ApiDoc = () => {
   const [serviceStatus, setServiceStatus] = useState<
     "UP" | "DOWN" | "LIMITED" | "UNKNOWN"
   >("UNKNOWN");
+
+  const [foreground, setForeground] = useState(
+    () => documentIsVisible(),
+  );
+
   const onServiceStatusChanged = useCallback(
     (status: "UP" | "DOWN" | "LIMITED" | "UNKNOWN") => {
       setServiceStatus(status);
@@ -19,6 +28,20 @@ export const ApiDoc = () => {
   const serviceIsDown = useMemo(() => serviceStatus === "DOWN", [
     serviceStatus,
   ]);
+
+  const onDocumentVisibilityChange = useCallback((_ev: Event) => {
+    setForeground(documentIsVisible());
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("visibilitychange", onDocumentVisibilityChange);
+
+    return () =>
+      document.removeEventListener(
+        "visibilitychange",
+        onDocumentVisibilityChange,
+      );
+  }, []);
 
   return (
     <div className="container mx-auto my-4">
@@ -31,7 +54,10 @@ export const ApiDoc = () => {
           >
             Version: {BA_VERSION}
           </Pill>
-          <HealthIndicator onStatusChanged={onServiceStatusChanged}>
+          <HealthIndicator
+            enabled={foreground}
+            onStatusChanged={onServiceStatusChanged}
+          >
           </HealthIndicator>
         </div>
       </h1>

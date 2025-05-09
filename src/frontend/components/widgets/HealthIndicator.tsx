@@ -6,11 +6,22 @@ import { Pill, Tint } from "./Pill";
 import { Loading } from "./Loading";
 
 interface HealthIndicatorProps {
+  /**
+   * When disabled the automatic refetch interval will not fire any requests
+   */
+  enabled: boolean;
+
+  /**
+   * Fired when an updated service status is detected
+   *
+   * @param status The new service status
+   * @returns
+   */
   onStatusChanged: (status: "UP" | "DOWN" | "LIMITED" | "UNKNOWN") => void;
 }
 
 const HealthIndicator = (
-  { onStatusChanged }: Partial<HealthIndicatorProps>,
+  { onStatusChanged, enabled }: Partial<HealthIndicatorProps>,
 ) => {
   const { data: serviceStatusData, isError, isFetching } = useQuery<
     { status: "UP" | "DOWN" | "LIMITED"; responseStatus: number }
@@ -24,6 +35,7 @@ const HealthIndicator = (
         ...response,
       };
     },
+    enabled,
     retry: 1,
     refetchInterval: 10000,
   });
